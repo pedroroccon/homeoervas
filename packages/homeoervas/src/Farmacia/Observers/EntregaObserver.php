@@ -12,8 +12,10 @@ class EntregaObserver
         $entrega->gerarNumero();
 
         if (request()->has('pago')) {
-            $entrega->concluir(['valor_pago' => $entrega->valor]);
-            $entrega->update();
+            if (request('pago') == 1) {
+                $entrega->concluir(['valor_pago' => $entrega->valor]);
+                $entrega->update();
+            }
         }
     
         if (request()->has('itens')) {
