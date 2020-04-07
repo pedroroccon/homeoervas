@@ -64,7 +64,7 @@
                 <strong style="font-size: 18px;">{{ $entrega->cliente }}</strong>
                 <span>{{ $entrega->endereco }}, Nº {{ $entrega->numero }} - {{ $entrega->bairro }}, {{ $entrega->cidade }}/{{ $entrega->estado }}</span>
                 <span><strong>Nº da entrega:</strong> {{ $entrega->pedido }}</span>
-                <span style="font-size: 15px;"><strong>Valor:</strong> R$ {{ number_format($entrega->valor, 2, ',', '.') }}</span>
+                <span style="font-size: 15px;"><strong>Valor:</strong> R$ {{ number_format($entrega->valor, 2, ',', '.') }}{!! $entrega->estaPago() ? ' <strong>(PAGO)</strong>' : null !!}</span>
                 {!! ! empty($entrega->troco) ? '<span><strong>Troco:</strong> R$ ' . number_format($entrega->troco, 2, ',', '.') . '</span>' : null !!}
                 <hr>
                 @foreach($entrega->itens as $item)

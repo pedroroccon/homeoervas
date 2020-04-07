@@ -45,7 +45,6 @@
 												@if ( ! $entrega->estaPago())
 													<span data-toggle="tooltip" title="Concluir entrega"><a class="btn btn-sm btn-link" data-toggle="modal" data-target="#m-concluir" data-url="{{ url($entrega->path() . '/concluir') }}" href="#" data-cliente="{{ $entrega->cliente }}" data-valor="{{ $entrega->valor }}"><i class="fas fa-truck fa-sm"></i></a></span>
 												@endif
-												<a class="btn btn-sm btn-link" data-toggle="tooltip" title="Editar" href="{{ url($entrega->path() . '/edit') }}"><i class="fas fa-pencil-alt fa-sm"></i></a>
 											    <button class="btn btn-sm btn-link btn-confirm-delete" data-toggle="tooltip" title="Remover" type="submit"><i class="fas fa-trash fa-sm text-danger"></i></button>
 											{!! Form::close() !!}
 										</td>

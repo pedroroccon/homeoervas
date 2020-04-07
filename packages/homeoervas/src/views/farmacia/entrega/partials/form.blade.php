@@ -107,7 +107,12 @@
             <div class="row">
                 <div class="col-lg-4 form-group">
                     <label :for="'itens[' + index + '][titulo]'">Item/produto</label>
-                    <input type="text" :name="'itens[' + index + '][titulo]'" class="form-control">
+                    <div class="input-group">
+                        <div class="input-group-prepend" v-if="index > 0">
+                            <button class="btn btn-danger" v-on:click.prevent="deleteItem(index)"><i class="fas fa-trash-alt fa-fw"></i></button>
+                        </div>
+                        <input type="text" :name="'itens[' + index + '][titulo]'" class="form-control">
+                    </div>
                     <span class="form-text">Informe o título do produto.</span>
                 </div>
                 <div class="col-lg-2 form-group">
@@ -184,7 +189,7 @@
             <div class="row">
                 <div class="col-lg-12 form-group">
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="usuario_{{ $usuario->id }}" name="responsavel" class="custom-control-input">
+                        <input type="radio" id="usuario_{{ $usuario->id }}" name="responsavel" class="custom-control-input" value="{{ $usuario->name }}">
                         <label class="custom-control-label" for="usuario_{{ $usuario->id }}">{{ $usuario->name }}</label>
                         <span class="form-text">{{ $usuario->email }}</span>
                     </div>
@@ -225,7 +230,7 @@
                 }, 
                 deleteItem: function(index) {
                     console.log('Deleting item...');
-                    this.itens.splide(index, 1);
+                    this.itens.splice(index, 1);
                 }, 
                 buscarCep: function() {
                     let vm = this;

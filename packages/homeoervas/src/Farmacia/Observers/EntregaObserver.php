@@ -10,6 +10,11 @@ class EntregaObserver
     public function created(Entrega $entrega)
     {
         $entrega->gerarNumero();
+
+        if (request()->has('pago')) {
+            $entrega->concluir(['valor_pago' => $entrega->valor]);
+            $entrega->update();
+        }
     
         if (request()->has('itens')) {
             foreach(request('itens') as $item) {

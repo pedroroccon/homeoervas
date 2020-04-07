@@ -30,14 +30,14 @@
             </div>
             <div class="col-lg-3">
                 @component('hive::components.param', ['title' => 'Qtde. homeopatias'])
-                    {!! $entrega->homeopatias ?? '<span class="text-muted">Nenhum item</span>' !!}
+                    {!! $itens->where('homeopatia', true)->count() !!}
                 @endcomponent
             </div>
         </div>
         <div class="row">
             <div class="col-lg-3">
                 @component('hive::components.param', ['title' => 'Algum item de geladeira?'])
-                    {!! $entrega->itens_geladeira ?? '<span class="text-muted">Nenhum item</span>' !!}
+                    {!! $itens->where('geladeira', true)->count() !!}
                 @endcomponent
             </div>
             <div class="col-lg-3">

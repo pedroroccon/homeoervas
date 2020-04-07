@@ -32,7 +32,7 @@ class EntregaRequest extends FormRequest
             'cidade' => 'required', 
             'estado' => 'required', 
             'valor' => 'required|numeric', 
-            'troco' => 'numeric', 
+            'troco' => 'nullable|numeric', 
             //'itens' => 'numeric', 
             //'homeopatias' => 'numeric', 
             //'itens_geladeira' => 'required|boolean', 
