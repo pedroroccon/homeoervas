@@ -1,0 +1,28 @@
+{
+    "name": "pedroroccon/farmacia",
+    "description": "Pacote customizável para farmácias.",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Pedro Roccon",
+            "email": "pedro@pedroroccon.com.br"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "src/database/migrations"
+        ], 
+        "psr-4": {
+            "Pedroroccon\\Farmacia\\": "src/Farmacia/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pedroroccon\\Farmacia\\FarmaciaServiceProvider"
+            ]
+        }
+    }
+}

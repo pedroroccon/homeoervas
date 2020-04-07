@@ -1,0 +1,138 @@
+.hello-title {
+	padding: 40px 0 8px 0;
+}
+.hello-btn {
+	font-weight: bold !important;
+}
+.hello-card-header {
+	background: #fff;
+	h1, h2, h3, h4, h5, h6, .card-title { padding: 0; margin: 0; }
+}
+
+.hello-table-toolbar {
+	margin-bottom: 20px;
+}
+
+.hello-table-toolbar-search {
+	
+	.input-group-text { border: none; }
+	
+	.form-control {
+		
+		border: none;
+
+		&:hover, &:active, &:focus {
+			border: none;
+			outline: 0;
+			box-shadow: none;
+		}
+	}
+}
+
+/**
+ * Card button
+ */
+.hive-btn-card {
+
+	padding: 30px;
+
+	svg {
+		width: 64px;
+		margin: 20px 0;
+		fill: #007bff;
+	}
+	
+	&:active, &:focus, &:hover, &.active {
+		svg { fill: #fff; }
+	}
+}
+
+
+// Tooltip
+
+.tooltip-inner {
+	font-family: 'Quicksand';
+	font-weight: 500;
+	font-size: .9em;
+}
+
+// Dropdown
+
+.dropdown-item {
+	font-family: 'Quicksand';
+	font-weight: 500;
+	font-size: .9em;
+}
+
+/**
+ * Tela de loading do sistema.
+ */
+.hive-loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	z-index: 9999;
+
+	.hive-loading-container {
+		width: 32px;
+		height: 32px;
+	}
+}
+
+/* Tabs */
+.hive-table-tabs {
+	margin-bottom: 20px;
+	font-size: .8em;
+}
+
+/**
+ * Params
+ */
+.hive-param {
+	
+	display: block;
+	margin: 10px 0;
+	padding: 6px 15px;
+	background: #f4f4f4;
+
+	.title {
+		display: block;
+		color: rgba(0, 0, 0, .75);
+		font-size: .8rem;
+	}
+	.value {
+		display: block;
+		font-size: .9rem;
+	}
+}
+
+/**
+ * Navbar pills
+ */
+.hello-navbar {
+	padding: 0;
+
+	.navbar-toggler {
+		padding: 0;
+		font-size: 1rem;
+	}
+	.navbar-collapse.collapse.show ul, .navbar-collapse.collapsing ul {
+		padding: 15px 0 0 27px;
+	}
+}
+
+/**
+ * Markdown areas
+ * css.
+ */
+.markdown-container h2 {
+	font-size: 12px;
+	font-weight: bold;
+	color: #aaa;
+}

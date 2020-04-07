@@ -1,0 +1,35 @@
+.hello-form {
+
+	label {
+		padding-top: 4px;
+		color: #555;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: .85em;
+	}
+	.form-control, .btn {
+		font-weight: 500;
+	}
+	.input-group-addon {
+		font-weight: bold;
+	}
+	.input-group-text {
+		font: 700 .8em 'Quicksand', sans-serif;
+		background: white;
+	}
+
+	.form-text {
+		color: #999;
+		font-size: .75em;
+	}
+}
+
+.app-form-footer-sticky {
+	position: sticky;
+	position: -webkit-sticky; /* Webkit fixes */
+	bottom: 0;
+
+	.card-body {
+		background: #fff;
+	}
+}

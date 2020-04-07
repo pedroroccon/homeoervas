@@ -1,0 +1,55 @@
+/* Overlays */
+
+.ui-widget-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.ui-autocomplete {
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: default;
+	background: #fff;
+	border: #ddd 1px solid;
+	box-sizing: border-box;
+	border-radius: $global-border-radius;
+	z-index: 9000;
+}
+.ui-menu {
+	padding: 8px 8px;
+	list-style: none;
+	margin: 0;
+	display: block;
+	outline: 0;
+	font-size: .85em;
+	box-sizing: border-box;
+	z-index: 9000 !important;
+}
+.ui-menu .ui-menu {
+	position: absolute;
+}
+.ui-menu .ui-menu-item {
+	padding: 10px;
+	cursor: pointer;
+	color: #868e96;
+	text-transform: uppercase;
+	border-radius: $global-border-radius;
+
+	strong { color: #000; }
+	
+	&:hover, &:active, &:focus {
+		background: #eee;
+	}
+}
+.ui-menu .ui-menu-item-wrapper {
+	position: relative;
+}
+.ui-menu .ui-menu-divider {
+	margin: 5px 0;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+}

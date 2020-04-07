@@ -1,0 +1,146 @@
+$global-border-radius: 5px;
+$global-transition-time: .2s;
+$global-transition-type: ease-in-out;
+
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import 'fonts';
+@import 'animate';
+
+@import 'typography';
+@import 'breadcrumbs';
+@import 'layout-components';
+@import 'tables';
+@import 'forms';
+@import 'icons';
+@import 'auth';
+@import 'autocomplete';
+
+html, body { height: 100%; }
+
+body {
+	font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+	font-weight: 500;
+
+	&::-webkit-scrollbar { width: 5px; height: 5px; }
+	&::-webkit-scrollbar-track { background: none; }
+	&::-webkit-scrollbar-thumb { background: #aaa; }
+	&::-webkit-scrollbar-thumb:hover { background: #999; }
+}
+
+.container-fluid {
+	@media only screen and (min-width : 768px) {
+		padding-left: 60px;
+		padding-right: 60px;
+    }
+}
+
+/*
+ * Hello CSS
+ */
+@import '_nav';
+
+.hello-content {
+	position: relative;
+	height: auto;
+	box-sizing: 'border-box';
+	
+	@media only screen and (min-width : 992px) {
+		float: right;
+		width: 80%;
+	}
+}
+
+.hello-footer {
+	
+	margin-top: 50px;
+	padding: 50px 0;
+	text-align: center;
+	background: #f4f4f4;
+
+	@media only screen and (min-width : 768px) {
+		padding: 120px 0;
+		text-align: left;
+		background: none;
+		margin-top: 0;
+	}
+
+	li a {
+		padding: 8px 0;
+		color: #bbb;
+		font: 700 .8em/2.4em 'Quicksand', sans-serif;
+		transition: color $global-transition-time $global-transition-type;
+
+		&:hover, &:focus, &:active {
+			color: #333;
+			text-decoration: none;
+		}
+	}
+}
+
+/**
+ * Bootstrap modal
+ */
+.modal-backdrop.show {
+	background-color: #007bff;
+	opacity: .8;
+}
+
+/**
+ * Hive flash messages
+ * 
+ * Mensagens que aparecem 
+ * no topo da página como 
+ * indicador principal do Hive.
+ */
+.hello-flash-messages {
+	.alert {
+		padding: 30px;
+		border: none;
+		border-radius: 0;
+	}
+}
+.form-text {
+	font-size: .85em;
+}
+
+
+/**
+ * 
+ * DROPDOWN SEARCH
+ * 
+ * Create a dropdown menu that allows 
+ * you to add some inputs inside.
+ * 
+ */
+.hello-dropdown-search-container {
+	position: absolute;
+	display: none;
+	top: 42px;
+	left: 0;
+	padding: 0 15px 0 15px;
+	width: 100%;
+	height: auto;
+	min-height: 100px;
+	width: 100%;
+	z-index: 9999;
+
+	box-sizing: border-box;
+}
+.hello-dropdown-search {
+	position: relative;
+	padding: 22px 15px 15px 15px;
+	width: 100%;
+	height: auto;
+	background: #fff;
+
+	box-sizing: border-box;
+	border-radius: $global-border-radius;
+	box-shadow: rgba(0, 0, 0, .125) 0 1px 5px;
+}
+
+// jQuery UI autocomplete
+.ui-menu { z-index: 9999; }

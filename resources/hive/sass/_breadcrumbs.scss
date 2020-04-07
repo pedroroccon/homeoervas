@@ -1,0 +1,22 @@
+.hello-breadcrumbs {
+	
+	font-size: .9em;
+	margin-bottom: 40px;
+
+	a {
+		color: #868e96;
+		text-decoration: none;
+		transition: color .2s ease-in-out, border-color .2s ease-in-out;
+		border-bottom: #868e96 1px solid;
+
+		&:hover, &:active, &:focus {
+			color: #007bff;
+			border-color: transparent;
+		}
+	}
+
+	.breadcrumb {
+		padding: 0;
+		background: none;
+	}
+}

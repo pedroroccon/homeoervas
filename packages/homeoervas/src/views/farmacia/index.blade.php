@@ -1,0 +1,1 @@
+<h1>Hello, i'm the dashboard for the package!</h1>
