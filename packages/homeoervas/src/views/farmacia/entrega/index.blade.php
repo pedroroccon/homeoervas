@@ -23,7 +23,7 @@
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>{!! Form::checkbox('check_all', 0, 0, ['id' => 'table-check-all']) !!}</th>
+										<th>&nbsp;</th>
 										<th>Cliente</th>
 										<th class="text-right">Itens/valor</th>
                                         <th>Endereço</th>
