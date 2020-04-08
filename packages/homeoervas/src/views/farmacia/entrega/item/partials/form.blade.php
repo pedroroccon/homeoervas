@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12 form-group">
         {!! Form::label('quantidade', 'Qtde.') !!}
         {!! Form::number('quantidade', null, ['class' => 'form-control', 'step' => 'any', 'min' => 0]) !!}
         <span class="form-text">Informe a quantidade de itens que estão sendo enviados na entrega.</span>

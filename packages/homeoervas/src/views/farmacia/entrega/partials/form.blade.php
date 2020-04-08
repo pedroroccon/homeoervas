@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-4 form-group">
                 {!! Form::label('telefone', 'Telefone/celular') !!}
                 {!! Form::text('telefone', null, ['class' => 'form-control']) !!}
                 <span class="form-text">Informe um número de telefone para este cliente.</span>
@@ -77,7 +77,6 @@
         <hr>
         
         <div class="row">
-            
             <div class="col-lg-3 form-group">
                 {!! Form::label('valor', 'Valor do pedido') !!}
                 <div class="input-group">
@@ -89,7 +88,7 @@
                 <span class="form-text">Informe o valor total das mercadorias.</span>
             </div>
             <div class="col-lg-3 form-group">
-                {!! Form::label('troco', 'Valor do troco') !!}
+                {!! Form::label('troco', 'Troco para') !!}
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">R$</span>

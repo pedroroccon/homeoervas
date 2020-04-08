@@ -58,6 +58,11 @@
         </div>
         <div class="row">
             <div class="col-lg-3">
+                @component('hive::components.param', ['title' => 'Troco para'])
+                    {!! $entrega->troco ? 'R$ ' . number_format($entrega->troco, 2, ',', '.') : '<span class="text-muted">Nada consta</span>' !!}
+                @endcomponent
+            </div>
+            <div class="col-lg-6">
                 @component('hive::components.param', ['title' => 'Tipo da entrega'])
                     {!! $entrega->envio ?? '<span class="text-muted">Não informado</span>' !!}
                 @endcomponent
@@ -67,7 +72,9 @@
                     {!! !empty($entrega->envio_em) ? $entrega->envio_em->format('d/m/Y') : '<span class="text-muted">Não informado</span>' !!}
                 @endcomponent
             </div>
-            <div class="col-lg-6">
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 @component('hive::components.param', ['title' => 'Responsável'])
                     {!! $entrega->responsavel ?? '<span class="text-muted">Não informado</span>' !!}
                 @endcomponent
