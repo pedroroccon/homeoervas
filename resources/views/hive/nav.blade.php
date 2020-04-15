@@ -8,6 +8,7 @@
 		{!! Form::close() !!}
 		<ul class="hello-nav-list">
 			<li><a href="{{ url(config('hello.url') . '/entrega/create') }}">Adicionar entrega</a></li>
+			<li><a href="{{ url(config('hello.url') . '/entrega/create?minimal=true') }}">Tela simplificada</a></li>
 			<li><a href="{{ url(config('hello.url') . '/entrega') }}">Listar entregas</a></li>
 			<li><a href="{{ url(config('hello.url') . '/entrega?semana=1') }}">Entregas da semana</a></li>
 			<li><a href="{{ url(config('hello.url') . '/entrega?status=pendentes') }}">Pendentes</a></li>
