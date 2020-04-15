@@ -83,7 +83,7 @@
 										<td><strong><a href="{{ url($entrega->path()) }}">{{ $entrega->cliente }}</a></strong><br><small class="text-muted">{{ $entrega->telefone ?? 'Sem telefone associado' }}</small></td>
 										<td class="text-right">{{ $entrega->itens()->count() }} item(ns)<br><small class="text-muted">R$ {{ number_format($entrega->valor, 2, ',', '.') }}</small></td>
 										<td>{{ $entrega->endereco }}, N {{ $entrega->numero }}<br><small class="text-muted">{{ $entrega->bairro }} - {{ $entrega->cidade }}/{{ $entrega->estado }}</small></td>
-                                        <td class="{{ $entrega->status->classe }}">{{ $entrega->status->descricao }}<br><small>{{ $entrega->status->data->format('d/m/Y') }}</small></td>
+                                        <td class="{{ $entrega->status->classe }}">{{ $entrega->status->descricao }}<br><small>{{ $entrega->status->data->format('d/m/Y H:i') }}</small></td>
                                         <td class="hello-table-action">
 											{!! Form::open(['url' => $entrega->path(), 'method' => 'delete']) !!}
 												@if ( ! $entrega->estaPago())
