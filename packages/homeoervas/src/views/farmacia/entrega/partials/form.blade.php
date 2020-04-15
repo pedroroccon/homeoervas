@@ -210,8 +210,8 @@
                 endereco: '', 
                 numero: '', 
                 bairro: '', 
-                cidade: '', 
-                estado: '', 
+                cidade: 'Limeira', 
+                estado: 'SP', 
                 complemento: '', 
                 loadingCep: false, 
                 itens: [{

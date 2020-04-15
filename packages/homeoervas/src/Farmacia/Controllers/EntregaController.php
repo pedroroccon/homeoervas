@@ -13,13 +13,27 @@ class EntregaController extends Controller
 
     public function index(EntregaFilters $filters)
     {
+        $entregasFeitasNaSemana = Entrega::impressas()->semana()->get();
+        $entregasFeitasHoje = $entregasFeitasNaSemana->filter(function($key) {
+            return $key->created_at->startOfDay()->eq(today()->startOfDay());
+        });
+
+        $entregasFeitasDeManha = $entregasFeitasHoje->filter(function($key) {
+            return $key->impresso_em->hour <= 12;
+        });
+
+        $entregasFeitasDeTarde = $entregasFeitasHoje->filter(function($key) {
+            return $key->impresso_em->hour > 13;
+        });
+
         $entregas = Entrega::filter($filters)->ordenado()->paginate();
-        return view('farmacia::farmacia.entrega.index', compact('entregas'));
+        return view('farmacia::farmacia.entrega.index', compact('entregas', 'entregasFeitasHoje', 'entregasFeitasDeManha', 'entregasFeitasDeTarde'));
     }
 
     public function create()
     {
-        return view('farmacia::farmacia.entrega.create');
+        $view = request()->has('minimal') ? 'minimal' : 'create';
+        return view('farmacia::farmacia.entrega.' . $view);
     }
 
     public function store(EntregaRequest $request)

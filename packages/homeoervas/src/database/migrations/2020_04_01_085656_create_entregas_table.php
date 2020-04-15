@@ -16,27 +16,24 @@ class CreateEntregasTable extends Migration
         Schema::create('entregas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('numero_entrega')->nullable()->default(0);
-            $table->string('cliente');
+            $table->string('cliente')->nullable();
             $table->string('telefone')->nullable();
-            $table->string('endereco');
-            $table->string('numero');
-            $table->string('bairro');
-            $table->string('cidade');
-            $table->char('estado', 2);
+            $table->string('endereco')->nullable();
+            $table->string('numero')->nullable();
+            $table->string('bairro')->nullable();
+            $table->string('cidade')->nullable();
+            $table->char('estado', 2)->nullable();
             $table->string('cep')->nullable();
             $table->decimal('valor', 16, 2)->default(0);
             $table->decimal('valor_pago')->nullable()->default(0);
             $table->dateTime('pago_em')->nullable();
             $table->decimal('troco')->nullable()->default(0);
             $table->string('pedido')->nullable();
-            // $table->integer('itens')->nullable()->default(0);
-            // $table->integer('homeopatias')->nullable()->default(0);
-            // $table->string('itens_geladeira')->nullable()->default(0);
 
             // Envio
             $table->string('envio')->nullable();
             $table->date('envio_em')->nullable();
-            $table->string('responsavel');
+            $table->string('responsavel')->nullable();
             $table->dateTime('impresso_em')->nullable();
             
             $table->text('observacao')->nullable();

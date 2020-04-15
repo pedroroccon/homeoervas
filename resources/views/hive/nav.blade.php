@@ -12,6 +12,7 @@
 			<li><a href="{{ url(config('hello.url') . '/entrega?semana=1') }}">Entregas da semana</a></li>
 			<li><a href="{{ url(config('hello.url') . '/entrega?status=pendentes') }}">Pendentes</a></li>
 			<li><a href="{{ url(config('hello.url') . '/entrega?status=pagas') }}">Pagas</a></li>
+			<li><a href="{{ url(config('hello.url') . '/entrega/relatorio') }}">Relatórios</a></li>
 		</ul>
 	</div>
 </div>

@@ -10,6 +10,50 @@
 @include('hive::components.breadcrumbs', ['breadcrumb' => Breadcrumbs::render('hello-entrega')])
 
 <div class="container-fluid">
+
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="card card-body border-0 text-primary shadow mb-4">
+				<div class="media">
+					<span class="align-self-center mr-3"><i class="fas fa-truck fa-2x mr-2"></i></span>
+					<div class="media-body">
+						<span class="lead d-block">R$ {{ number_format($entregasFeitasHoje->sum('valor'), 2, ',', '.') }}</span>
+						<small class="d-block">
+							Entregas hoje {{ today()->format('d/m/Y') }}<br>
+						</small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="card card-body border-0 text-secondary shadow mb-4">
+				<div class="media">
+					<span class="align-self-center mr-3"><i class="fas fa-stopwatch fa-2x mr-2"></i></span>
+					<div class="media-body">
+						<span class="lead d-block">R$ {{ number_format($entregasFeitasDeManha->sum('valor'), 2, ',', '.') }}</span>
+						<small class="d-block">
+							No período da manhã<br>
+						</small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="card card-body border-0 text-secondary shadow mb-4">
+				<div class="media">
+					<span class="align-self-center mr-3"><i class="fas fa-stopwatch fa-2x mr-2"></i></span>
+					<div class="media-body">
+						<span class="lead d-block">R$ {{ number_format($entregasFeitasDeTarde->sum('valor'), 2, ',', '.') }}</span>
+						<small class="d-block">
+							No período da tarde<br>
+						</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
     <div class="card">
 		<div class="card-body">
 		

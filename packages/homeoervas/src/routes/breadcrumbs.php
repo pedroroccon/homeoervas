@@ -17,3 +17,8 @@ Breadcrumbs::register('hello-entrega-edit', function ($b, $entrega) {
     $b->parent('hello-entrega-show', $entrega);
     $b->push('Editar', url($entrega->path() . '/edit'));
 });
+
+Breadcrumbs::register('hello-entrega-relatorio', function ($b) {
+    $b->parent('hello-entrega');
+    $b->push('Relatórios', url(config('hello.url') . '/entrega/relatorio'));
+});

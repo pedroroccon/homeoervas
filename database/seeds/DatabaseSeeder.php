@@ -60,7 +60,8 @@ class DatabaseSeeder extends Seeder
                 'envio_em' => $data->format('Y-m-d'), 
                 'responsavel' => $faker->name, 
                 'impresso_em' => $data->format('Y-m-d H:i:s'), 
-                'observacao' => 'Entrega realizada na semana passada, na data de ' . $data->format('d/m/Y')
+                'observacao' => 'Entrega realizada na semana passada, na data de ' . $data->format('d/m/Y'), 
+                'created_at' => $data->format('Y-m-d H:i:s'), 
             ]);
         }
 

@@ -120,8 +120,24 @@ class Entrega extends Model
         return $query->whereRaw('valor_pago < valor');
     }
 
+    public function scopeImpressas($query)
+    {
+        return $query->whereNotNull('impresso_em');
+    }
+
+    public function scopeHoje($query)
+    {
+        return $query->whereDate('created_at', today());
+    }
+
+    public function scopeSemana($query)
+    {
+        return $query->whereDate('created_at', '>=', today()->startOfWeek())->whereDate('created_at', '<=', today()->endOfWeek());
+    }
+
     public function getValorSaldoAttribute()
     {
         return $this->valor - $this->valor_pago;
     }
+    
 }
