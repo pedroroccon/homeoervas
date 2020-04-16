@@ -34,10 +34,10 @@
 			<nav class="navbar navbar-expand-lg">
 				<div class="collapse navbar-collapse" id="main-nav">
 					<div id="hello-nav-accordion" data-children=".item" style="overflow: auto;">
-						<div class="item">
+						<!--<div class="item">
 							<div class="hello-nav-menu-item-image"><img src="{{ asset('h-assets/svg/hello-svg/001-rgb.svg') }}" alt="Início"></div>
 							<a class="hello-nav-menu-item" href="{{ url(config('hello.url')) }}">Início</a>
-						</div>
+						</div>-->
 
 						<!-- Customizações -->
 						@includeIf('hive.nav')

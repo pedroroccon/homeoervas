@@ -25,7 +25,7 @@
 								<div class="media">
 									<span class="align-self-center mr-3"><i class="fas fa-truck fa-2x mr-2"></i></span>
 									<div class="media-body">
-										<span class="lead d-block">R$ {{ number_format($grupo->sum('valor'), 2, ',', '.') }}</span>
+										<span class="lead d-block">R$ {{ number_format($grupo->sum('valor_pago'), 2, ',', '.') }}</span>
 										<small class="d-block">
 											Entregas no período<br>
 											Totalizando {{ $grupo->count() }} entrega(s)
@@ -39,7 +39,7 @@
 								<div class="media">
 									<span class="align-self-center mr-3"><i class="fas fa-stopwatch fa-2x mr-2"></i></span>
 									<div class="media-body">
-										<span class="lead d-block">R$ {{ number_format($grupo->filter(function($key) { return $key->impresso_em->hour <= 12; })->sum('valor'), 2, ',', '.') }}</span>
+										<span class="lead d-block">R$ {{ number_format($grupo->filter(function($key) { return $key->impresso_em->hour <= 12; })->sum('valor_pago'), 2, ',', '.') }}</span>
 										<small class="d-block">
 											No período da manhã<br>
 											Até 13hrs
@@ -53,10 +53,10 @@
 								<div class="media">
 									<span class="align-self-center mr-3"><i class="fas fa-stopwatch fa-2x mr-2"></i></span>
 									<div class="media-body">
-										<span class="lead d-block">R$ {{ number_format($grupo->filter(function($key) { return $key->impresso_em->hour > 13; })->sum('valor'), 2, ',', '.') }}</span>
+										<span class="lead d-block">R$ {{ number_format($grupo->filter(function($key) { return $key->impresso_em->hour > 13; })->sum('valor_pago'), 2, ',', '.') }}</span>
 										<small class="d-block">
 											No período da tarde<br>
-											Após as 13hrs
+											Após as 13hrs<br>
 										</small>
 									</div>
 								</div>
@@ -69,12 +69,23 @@
 					<div class="col-lg-12">
 						<div class="table-responsive">
 							<table class="table hello-table hello-table-no-wrap mb-0">
+								<thead>
+									<tr>
+										<th>Nº</th>
+										<th>Cliente/telefone</th>
+										<th class="text-right">Valor/itens</th>
+										<th class="text-right">Valor pago/saldo</th>
+										<th>Data da impressão</th>
+										<th>Endereço</th>
+									</tr>
+								</thead>
 								<tbody>
         		                    @foreach($grupo as $entrega)
         		                        <tr>
         		                            <td>{{ $entrega->numero_entrega }}</td>
         		                            <td><strong><a href="{{ url($entrega->path()) }}">{{ $entrega->cliente }}</a></strong><br><small class="text-muted">{{ $entrega->telefone ?? 'Sem telefone associado' }}</small></td>
         		                            <td class="text-right">R$ {{ number_format($entrega->valor, 2, ',', '.') }}<br><small class="text-muted">{{ $entrega->itens()->count() }} item(ns)</small></td>
+        		                            <td class="text-right">R$ {{ number_format($entrega->valor_pago, 2, ',', '.') }}<br><small class="text-muted">Saldo R$ {{ number_format($entrega->valor - $entrega->valor_pago, 2, ',', '.') }}</small></td>
         		                            <td>{{ $entrega->impresso_em->format('d/m/Y') }}<br><small class="text-muted">{{ $entrega->impresso_em->format('H:i') }}</small></td>
         		                            <td>{{ $entrega->endereco }}, N {{ $entrega->numero }}<br><small class="text-muted">{{ $entrega->bairro }} - {{ $entrega->cidade }}/{{ $entrega->estado }}</small></td>
         		                        </tr>

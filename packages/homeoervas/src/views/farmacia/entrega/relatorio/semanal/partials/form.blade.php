@@ -3,13 +3,13 @@
     @component('hive::components.card', ['title' => 'Informações do relatório'])
 
         <div class="row">
-            <div class="col-lg-4 form-group">
+            <div class="col-lg-3 form-group">
                 {!! Form::label('inicio', 'Data inicial') !!}
                 {!! Form::date('inicio', null, ['class' => 'form-control']) !!}
                 <span class="form-text">Informe a data inicial de análise.</span>
             </div>
 
-            <div class="col-lg-4 form-group">
+            <div class="col-lg-3 form-group">
                 {!! Form::label('termino', 'Data de término') !!}
                 {!! Form::date('termino', null, ['class' => 'form-control']) !!}
                 <span class="form-text">Informe a data de término da análise.</span>
