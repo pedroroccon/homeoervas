@@ -25,6 +25,7 @@ class EntregaRelatorioController extends Controller
         $request->validate([
             'inicio' => 'required|date', 
             'termino' => 'required|date|after_or_equal:inicio', 
+            'ordenar' => 'required'
         ]);
 
         $entregas = Entrega::whereNotNull('impresso_em')->whereDate('impresso_em', '>=', $request->inicio)->whereDate('impresso_em', '<=', $request->termino)->orderBy($request->ordenar)->get();
