@@ -21,7 +21,7 @@
 				<table>
 					<tr>
 						<td>
-							<div class="p-3 text-primary mb-4">
+							<div class="p-3 text-secondary mb-4 text-center">
 								<div class="media">
 									<span class="align-self-center mr-3"><i class="fas fa-truck fa-2x mr-2"></i></span>
 									<div class="media-body">
@@ -35,7 +35,7 @@
 							</div>
 						</td>
 						<td>
-							<div class="p-3 text-secondary mb-4">
+							<div class="p-3 text-secondary mb-4 text-center">
 								<div class="media">
 									<span class="align-self-center mr-3"><i class="fas fa-stopwatch fa-2x mr-2"></i></span>
 									<div class="media-body">
@@ -49,7 +49,7 @@
 							</div>
 						</td>
 						<td>
-							<div class="p-3 text-secondary mb-4">
+							<div class="p-3 text-secondary mb-4 text-center">
 								<div class="media">
 									<span class="align-self-center mr-3"><i class="fas fa-stopwatch fa-2x mr-2"></i></span>
 									<div class="media-body">

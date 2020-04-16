@@ -31,7 +31,7 @@ class EntregaFilters extends Filters
 
     protected function auto($auto)
     {
-        return $this->builder->where('cliente', 'like', '%' . $cliente . '%');
+        return $this->builder->where('cliente', 'like', '%' . $auto . '%');
     }
 
     protected function cliente($cliente)

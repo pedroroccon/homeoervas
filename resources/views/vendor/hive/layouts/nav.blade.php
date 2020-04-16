@@ -51,8 +51,6 @@
 									<li><a href="{{ url(config('hello.url') . '/empresa') }}">Minha empresa</a></li>
 									<li><a href="{{ url(config('hello.url') . '/usuario') }}">Usuários</a></li>
 									<li><a href="{{ url(config('hello.url') . '/usuario/create') }}">Adicionar usuário</a></li>
-									<li><a href="{{ url(config('hello.url') . '/operacao') }}">Operações</a></li>
-									<li><a href="{{ url(config('hello.url') . '/localidade') }}">Localidades</a></li>
 								</ul>
 							</div>
 						</div>

@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             '--class' => '\Pedroroccon\Hello\Seeders\UsersTableSeeder',
         ]);
         Artisan::call('db:seed', [
-            '--class' => '\Pedroroccon\Hello\Seeders\EmpresasTableSeeder',
+            '--class' => '\Pedroroccon\Farmacia\Seeders\EmpresaTableSeeder',
         ]);
 
         Artisan::call('hive-localidade:seed');

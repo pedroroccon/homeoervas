@@ -72,6 +72,7 @@
 										<th class="text-right">Itens/valor</th>
                                         <th>Endereço</th>
                                         <th>Status</th>
+										<th class="text-center"><i class="fas fa-print fa-fw"></i></th>
 										<th class="hello-table-action">Ações</th>
 									</tr>
 								</thead>
@@ -84,7 +85,8 @@
 										<td class="text-right">{{ $entrega->itens()->count() }} item(ns)<br><small class="text-muted">R$ {{ number_format($entrega->valor, 2, ',', '.') }}</small></td>
 										<td>{{ $entrega->endereco }}, N {{ $entrega->numero }}<br><small class="text-muted">{{ $entrega->bairro }} - {{ $entrega->cidade }}/{{ $entrega->estado }}</small></td>
                                         <td class="{{ $entrega->status->classe }}">{{ $entrega->status->descricao }}<br><small>{{ $entrega->status->data->format('d/m/Y H:i') }}</small></td>
-                                        <td class="hello-table-action">
+                                        <td class="text-center"><i data-toggle="tooltip" title="{{ ! empty($entrega->impresso_em) ? 'Impresso em ' . $entrega->impresso_em->format('d/m/Y') : 'Não impresso' }}" class="fas fa-print fa-fw {{ ! empty($entrega->impresso_em) ? 'text-success' : 'text-light' }}"></i></td>
+										<td class="hello-table-action">
 											{!! Form::open(['url' => $entrega->path(), 'method' => 'delete']) !!}
 												@if ( ! $entrega->estaPago())
 													<span data-toggle="tooltip" title="Concluir entrega"><a class="btn btn-sm btn-link" data-toggle="modal" data-target="#m-concluir" data-url="{{ url($entrega->path() . '/concluir') }}" href="#" data-cliente="{{ $entrega->cliente }}" data-valor="{{ $entrega->valor }}"><i class="fas fa-truck fa-sm"></i></a></span>
@@ -129,6 +131,7 @@
 			methods: {
 				sendToPrint: function() {
 					window.open('{{ url('entrega/imprimir') }}?entregas=' + this.selectedResources.join(','), '_blank');
+					location.reload();
 				}
 			}
 		});

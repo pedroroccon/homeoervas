@@ -28,16 +28,6 @@ class EntregaStatus extends Statusable
             return $this; 
         }
         
-        if ( ! empty($this->recurso->impresso_em)) {
-            $this->codigo = 'i';
-            $this->descricao = 'Impresso';
-            $this->classe = 'text-secondary';
-            $this->step = 1;
-            $this->data = $this->recurso->impresso_em;
-
-            return $this;
-        }
-        
         $this->codigo = 'x';
         $this->descricao = 'Pendente';
         $this->step = 0;
