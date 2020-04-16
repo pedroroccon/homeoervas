@@ -64,12 +64,12 @@
         <div class="row">
             <div class="col-lg-4 form-group">
                 {!! Form::label('cidade', 'Cidade *') !!}
-                {!! Form::text('cidade', null, ['class' => 'form-control', 'v-model' => 'cidade']) !!}
+                {!! Form::text('cidade', ! isset($entrega) ? 'Limeira' : null, ['class' => 'form-control', 'v-model' => 'cidade']) !!}
                 <span class="form-text">Informe a cidade referente ao endereço.</span>
             </div>
             <div class="col-lg-3 form-group">
 				{!! Form::label('estado', 'Estado *', ['class' => 'control-label']) !!}
-				{!! Form::select('estado', ['Por favor, selecione...'] + \Pedroroccon\Localidade\Estado::ordenado()->pluck('titulo', 'sigla')->toArray() + ['EX' => 'Exterior (Entidades estrangeiras)'], null, ['class' => 'form-control', 'v-model' => 'estado']) !!}
+				{!! Form::select('estado', ['Por favor, selecione...'] + \Pedroroccon\Localidade\Estado::ordenado()->pluck('titulo', 'sigla')->toArray() + ['EX' => 'Exterior (Entidades estrangeiras)'], ! isset($entrega) ? 'SP' : null, ['class' => 'form-control', 'v-model' => 'estado']) !!}
 				<p class="form-text">Especifique o estado referente ao endereço. <span class="text-success">Para entidades estrangeiras, utilizar EX.</span></p>
 			</div>
         </div>
