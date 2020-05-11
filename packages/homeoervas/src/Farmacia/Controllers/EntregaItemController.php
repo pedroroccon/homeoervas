@@ -11,9 +11,15 @@ class EntregaItemController extends Controller
 {
     public function store(Request $request, Entrega $entrega)
     {
+        $request->validate([
+            'titulo' => 'required', 
+            'quantidade' => 'required|numeric', 
+        ]);
+
         $item = (new EntregaItem)->fill($request->all());
         $entrega->itens()->save($item);
         session()->flash('flash_success', 'Item ' . $item->titulo . ' adicionado com sucesso na entrega para <a href="' . url($entrega->path()) . '">' . $entrega->cliente . '</a>');
+        return back();
     }
 
     public function destroy(Entrega $entrega, EntregaItem $item)

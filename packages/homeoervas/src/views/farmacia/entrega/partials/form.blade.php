@@ -162,9 +162,7 @@
             <div class="col-lg-3 form-group">
                 {!! Form::label('envio', 'Tipo do envio') !!}
                 {!! Form::select('envio', [
-                    '' => 'Por favor, selecione...', 
-                    'PAC' => 'PAC', 
-                    'SEDEX' => 'SEDEX', 
+                    'Motoboy' => 'Motoboy', 
                 ], null, ['class' => 'form-control']) !!}
                 <span class="form-text">Informe o tipo do envio.</span>
             </div>
@@ -175,7 +173,7 @@
                     0 => 'Não', 
                     1 => 'Sim', 
                 ], null, ['class' => 'form-control']) !!}
-                <span class="form-text text-danger">P.S. Até 16h na mesa do Rodrigo!</span>
+                <strong class="form-text text-danger">P.S. Até 16h na mesa do Rodrigo!</strong>
             </div>
         </div>
         <hr>
@@ -184,15 +182,17 @@
                 {!! Form::label('responsavel', 'Responsável') !!}
             </div>
         </div>
-        @foreach(App\User::all() as $usuario)
+        @foreach(App\User::whereNotIn('email', ['byus@byus.com.br', 'app@ahomeoervas.com.br', 'usuario@usuario.com.br'])->orderBy('name')->get()->chunk(3) as $row)
             <div class="row">
-                <div class="col-lg-12 form-group">
+                @foreach($row as $usuario)
+                <div class="col-lg-4 form-group">
                     <div class="custom-control custom-radio">
                         <input type="radio" id="usuario_{{ $usuario->id }}" name="responsavel" class="custom-control-input" value="{{ $usuario->name }}">
                         <label class="custom-control-label" for="usuario_{{ $usuario->id }}">{{ $usuario->name }}</label>
                         <span class="form-text">{{ $usuario->email }}</span>
                     </div>
                 </div>
+                @endforeach
             </div>
         @endforeach        
     @endcomponent
