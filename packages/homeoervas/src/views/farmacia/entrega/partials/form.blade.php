@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-9 form-group">
                 {!! Form::label('cliente', 'Nome do cliente *') !!}
-                {!! Form::text('cliente', null, ['class' => 'form-control']) !!}
+                {!! Form::text('cliente', null, ['class' => 'form-control', 'required']) !!}
                 <span class="form-text">Por favor, informe o nome ou parte do nome do cliente para pesquisar.</span>
             </div>
             <div class="col-lg-3 form-group">
@@ -13,7 +13,7 @@
                     '' => 'Por favor, selecione...', 
                     0 => 'Não', 
                     1 => 'Sim', 
-                ], null, ['class' => 'form-control']) !!}
+                ], null, ['class' => 'form-control', 'required']) !!}
                 <span class="form-text">Informe se o pedido já foi pago.</span>
             </div>
         </div>
@@ -46,17 +46,17 @@
             </div>
             <div class="col-lg-4 form-group">
                 {!! Form::label('endereco', 'Endereço *') !!}
-                {!! Form::text('endereco', null, ['class' => 'form-control', 'v-model' => 'endereco']) !!}
+                {!! Form::text('endereco', null, ['class' => 'form-control', 'v-model' => 'endereco', 'required']) !!}
                 <span class="form-text">Informe o endereço referente ao cliente.</span>
             </div>
             <div class="col-lg-2 form-group">
                 {!! Form::label('numero', 'Número *') !!}
-                {!! Form::text('numero', null, ['class' => 'form-control', 'v-model' => 'numero']) !!}
+                {!! Form::text('numero', null, ['class' => 'form-control', 'v-model' => 'numero', 'required']) !!}
                 <span class="form-text">Informe o número referente ao endereço.</span>
             </div>
             <div class="col-lg-3 form-group">
                 {!! Form::label('bairro', 'Bairro *') !!}
-                {!! Form::text('bairro', null, ['class' => 'form-control', 'v-model' => 'bairro']) !!}
+                {!! Form::text('bairro', null, ['class' => 'form-control', 'v-model' => 'bairro', 'required']) !!}
                 <span class="form-text">Informe o bairro referente ao cliente.</span>
             </div>
         </div>
@@ -83,7 +83,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">R$</span>
                     </div>
-                    {!! Form::number('valor', null, ['class' => 'form-control', 'step' => 'any']) !!}
+                    {!! Form::number('valor', null, ['class' => 'form-control', 'step' => 'any', 'required']) !!}
                 </div>
                 <span class="form-text">Informe o valor total das mercadorias.</span>
             </div>
@@ -110,13 +110,13 @@
                         <div class="input-group-prepend" v-if="index > 0">
                             <button class="btn btn-danger" v-on:click.prevent="deleteItem(index)"><i class="fas fa-trash-alt fa-fw"></i></button>
                         </div>
-                        <input type="text" :name="'itens[' + index + '][titulo]'" class="form-control">
+                        <input type="text" :name="'itens[' + index + '][titulo]'" class="form-control" required>
                     </div>
                     <span class="form-text">Informe o título do produto.</span>
                 </div>
                 <div class="col-lg-2 form-group">
                     <label :for="'itens[' + index + '][quantidade]'">Qtde.</label>
-                    <input type="number" step="any" min="0" :name="'itens[' + index + '][quantidade]'" class="form-control">
+                    <input type="number" step="any" min="0" :name="'itens[' + index + '][quantidade]'" class="form-control" required>
                     <span class="form-text">Informe a quantidade que será enviada.</span>
                 </div>
                 <div class="col-lg-2 form-group">
@@ -172,7 +172,7 @@
                     '' => 'Selecione...', 
                     0 => 'Não', 
                     1 => 'Sim', 
-                ], null, ['class' => 'form-control']) !!}
+                ], null, ['class' => 'form-control', 'required']) !!}
                 <strong class="form-text text-danger">P.S. Até 16h na mesa do Rodrigo!</strong>
             </div>
         </div>
@@ -187,7 +187,7 @@
                 @foreach($row as $usuario)
                 <div class="col-lg-4 form-group">
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="usuario_{{ $usuario->id }}" name="responsavel" class="custom-control-input" value="{{ $usuario->name }}">
+                        <input type="radio" id="usuario_{{ $usuario->id }}" name="responsavel" class="custom-control-input" value="{{ $usuario->name }}" required>
                         <label class="custom-control-label" for="usuario_{{ $usuario->id }}">{{ $usuario->name }}</label>
                         <span class="form-text">{{ $usuario->email }}</span>
                     </div>
@@ -216,7 +216,7 @@
                 loadingCep: false, 
                 itens: [{
                     titulo: null, 
-                    quantidade: null, 
+                    quantidade: 1, 
                     pedido: null
                 }], 
             }, 
@@ -224,7 +224,8 @@
                 createItem: function() {
                     console.log('Creating item...');
                     this.itens.push({
-                        titulo: null
+                        titulo: null, 
+                        quantidade: 1, 
                     });
                 }, 
                 deleteItem: function(index) {

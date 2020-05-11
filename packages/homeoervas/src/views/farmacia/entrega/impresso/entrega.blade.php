@@ -70,6 +70,11 @@
                 @foreach($entrega->itens as $item)
                     <span><strong>{{ $item->titulo }}</strong>: {{ number_format($item->quantidade, 2, ',', '.') }}</span>
                 @endforeach
+
+                @if ( ! empty($entrega->observacao))
+                    <hr>
+                    <span><strong>OBS:</strong> {{ nl2br($entrega->observacao) }}</span>
+                @endif
             </div>
         </div>
         @endforeach
