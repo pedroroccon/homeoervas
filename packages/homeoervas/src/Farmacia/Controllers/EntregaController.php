@@ -51,9 +51,13 @@ class EntregaController extends Controller
         return view('farmacia::farmacia.entrega.show', compact('entrega', 'itens'));
     }
 
-    public function edit(Entrega $entrega)
+    public function update(EntregaRequest $request, Entrega $entrega)
     {
-        return view('farmacia::farmacia.entrega.edit', compact('entrega'));
+        $entrega->fill($request->all());
+        $entrega->update();
+
+        session()->flash('flash_success', 'Entrega para <a href="' . url($entrega->path()) . '">' . $entrega->cliente . '</a> alterada com sucesso!');
+        return back();
     }
 
     public function destroy(Entrega $entrega)

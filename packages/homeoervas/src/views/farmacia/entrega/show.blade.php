@@ -3,12 +3,20 @@
 @section('content')
 
 <!-- Header -->
-@include('hive::components.title', ['page_title' => 'Entrega para ' . $entrega->cliente, 'page_button' => ['Editar', url()->current() . '/edit']])
+@include('hive::components.title', ['page_title' => 'Entrega para ' . $entrega->cliente])
 
 <!-- Breadcrumbs -->
 @include('hive::components.breadcrumbs', ['breadcrumb' => Breadcrumbs::render('hello-entrega-show', $entrega)])
 
 <div class="container-fluid">
+
+    <div class="card card-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="#" data-toggle="modal" data-target="#m-editar" class="btn btn-primary"><i class="fas fa-edit fa-fw mr-2"></i> Editar entrega</a>
+            </div>
+        </div>
+    </div>
 
     @component('hive::components.card', ['title' => 'Informações gerais'])
 
@@ -171,5 +179,6 @@
 
 <!-- Modals -->
 @include('farmacia::farmacia.entrega.item.partials.add', ['resource' => $entrega])
+@include('farmacia::farmacia.entrega.partials.editar', ['resource' => $entrega])
 
 @endsection

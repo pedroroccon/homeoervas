@@ -9,7 +9,7 @@
 @include('hive::components.breadcrumbs', ['breadcrumb' => Breadcrumbs::render('hello-entrega-edit', $entrega)])
 
 {!! Form::model($entrega, ['url' => $entrega->path(), 'method' => 'patch', 'class' => 'hello-form']) !!}
-    @include('farmacia::farmacia.entrega.partials.form', ['submit_button_text' => 'Editar entrega'])
+    @include('farmacia::farmacia.entrega.partials.form-edit', ['submit_button_text' => 'Editar entrega'])
 {!! Form::close() !!}
 
 @endsection

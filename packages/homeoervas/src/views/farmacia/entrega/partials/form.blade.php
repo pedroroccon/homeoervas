@@ -194,7 +194,7 @@
                 </div>
                 @endforeach
             </div>
-        @endforeach        
+        @endforeach
     @endcomponent
 
     @include('hive::components.form-footer', ['button' => $submit_button_text])
@@ -203,58 +203,79 @@
 @section('script')
 @parent
 <script type="application/javascript">
-        const form = new Vue({
-            el: '#form', 
-            data: {
-                cep: '', 
-                endereco: '', 
-                numero: '', 
-                bairro: '', 
-                cidade: 'Limeira', 
-                estado: 'SP', 
-                complemento: '', 
-                loadingCep: false, 
-                itens: [{
+    
+    $(function() {
+        switchPago();
+        $('#pago').change(switchPago);
+
+        function switchPago() {
+
+            console.log('Verificando switch de pagamento...');
+
+            var pago = $('#pago').val();
+
+            if (pago == 1) {
+                $('#valor').val(0);
+            } else {
+                $('#valor').val('');
+            }
+
+        }
+    }, (jQuery));
+
+
+    const form = new Vue({
+        el: '#form', 
+        data: {
+            cep: '', 
+            endereco: '', 
+            numero: '', 
+            bairro: '', 
+            cidade: 'Limeira', 
+            estado: 'SP', 
+            complemento: '', 
+            loadingCep: false, 
+            itens: [{
+                titulo: null, 
+                quantidade: 1, 
+                pedido: null
+            }], 
+        }, 
+        methods: {
+            createItem: function() {
+                console.log('Creating item...');
+                this.itens.push({
                     titulo: null, 
                     quantidade: 1, 
-                    pedido: null
-                }], 
-            }, 
-            methods: {
-                createItem: function() {
-                    console.log('Creating item...');
-                    this.itens.push({
-                        titulo: null, 
-                        quantidade: 1, 
-                    });
-                }, 
-                deleteItem: function(index) {
-                    console.log('Deleting item...');
-                    this.itens.splice(index, 1);
-                }, 
-                buscarCep: function() {
-                    let vm = this;
-                    vm.loadingCep = true;
-                    console.log('Buscando CEP...');
-                    axios.get('https://viacep.com.br/ws/' + this.cep + '/json/').then(function (response) {
-                        console.log(response.data);
-                        vm.endereco = response.data.logradouro;
-                        vm.bairro = response.data.bairro;
-                        vm.cidade = response.data.localidade;
-                        vm.estado = response.data.uf;
-                        vm.complemento = response.data.complemento;
-                        vm.loadingCep = false;
-                        $('#numero').focus();
-                    })
-                }
-            }, 
-            mounted: function() {
-                this.$nextTick(function() {
-                    window.addEventListener('keyup', event => {
-                        if (event.altKey && event.keyCode == 78) { this.buscarCep(); }
-                    });
                 });
+            }, 
+            deleteItem: function(index) {
+                console.log('Deleting item...');
+                this.itens.splice(index, 1);
+            }, 
+            buscarCep: function() {
+                let vm = this;
+                vm.loadingCep = true;
+                console.log('Buscando CEP...');
+                axios.get('https://viacep.com.br/ws/' + this.cep + '/json/').then(function (response) {
+                    console.log(response.data);
+                    vm.endereco = response.data.logradouro;
+                    vm.bairro = response.data.bairro;
+                    vm.cidade = response.data.localidade;
+                    vm.estado = response.data.uf;
+                    vm.complemento = response.data.complemento;
+                    vm.loadingCep = false;
+                    $('#numero').focus();
+                })
             }
-        })
+        }, 
+        mounted: function() {
+            this.$nextTick(function() {
+                window.addEventListener('keyup', event => {
+                    if (event.altKey && event.keyCode == 78) { this.buscarCep(); }
+                });
+            });
+        }
+    })
 </script>
 @endsection
