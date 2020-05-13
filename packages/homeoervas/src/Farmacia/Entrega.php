@@ -3,6 +3,7 @@
 namespace Pedroroccon\Farmacia;
 
 use Illuminate\Database\Eloquent\Model as Model;
+use Carbon\Carbon;
 
 class Entrega extends Model
 {
@@ -19,9 +20,6 @@ class Entrega extends Model
         'valor', 
         'valor_pago', 
         'troco', 
-        // 'itens', 
-        // 'itens_geladeira', 
-        // 'homeopatias', 
         'envio', 
         'envio_em', 
         'observacao', 
@@ -31,6 +29,7 @@ class Entrega extends Model
     protected $dates = [
         'pago_em', 
         'envio_em', 
+        'fechado_em', 
         'impresso_em', 
     ];
 
@@ -63,6 +62,28 @@ class Entrega extends Model
         });
     }
 
+    public static function fecharPeriodo($inicio, $termino = null)
+    {
+        $termino = $termino ?? $inicio;
+        $inicio = Carbon::createFromFormat('Y-m-d H:i:s', $inicio);
+        $termino = Carbon::createFromFormat('Y-m-d H:i:s', $termino);
+
+        $fechamentos = self::fechamentosPendentes($inicio, $termino);
+
+        if (empty($fechamentos)) {
+            throw new \Exception('Nenhuma entrega encontrada para realizar o fechamento. Por favor, escolha outro período');
+        }
+
+        $numero = self::whereDate('impresso_em', $inicio->format('Y-m-d'))->whereNotNull('fechado_em')->max('fechado_sequencial') ?? 0;
+        $numero++;
+
+        $fechamentos = $fechamentos->whereNull('fechado_em');
+        $fechamentos->update([
+            'fechado_em' => now(), 
+            'fechado_sequencial' => $numero
+        ]);
+    }
+
     public function itens()
     {
         return $this->hasMany(EntregaItem::class);
@@ -87,8 +108,8 @@ class Entrega extends Model
 
     public function gerarNumero()
     {
-        $inicio = $this->created_at->startOfWeek();
-        $termino = $this->created_at->endOfWeek();
+        $inicio = $this->created_at->startOfDay();
+        $termino = $this->created_at->endOfDay();
 
         $numero_ultima_entrega = $this->whereDate('created_at', '>=', $inicio)->whereDate('created_at', '<=', $termino)->max('numero_entrega');
         $this->numero_entrega = $numero_ultima_entrega + 1;
@@ -133,6 +154,21 @@ class Entrega extends Model
     public function scopeSemana($query)
     {
         return $query->whereDate('created_at', '>=', today()->startOfWeek())->whereDate('created_at', '<=', today()->endOfWeek());
+    }
+
+    public function scopeFechamentosPendentes($query, $inicio = null, $termino = null)
+    {
+        $query->whereNull('fechado_em');
+
+        if ( ! empty($inicio)) {
+            $query->where('impresso_em', '>=', $inicio);
+        }
+
+        if ( ! empty($termino)) {
+            $query->where('impresso_em', '<=', $termino);
+        }
+
+        return $query;
     }
 
     public function getValorSaldoAttribute()

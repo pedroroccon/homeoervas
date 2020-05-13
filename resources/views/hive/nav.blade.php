@@ -13,9 +13,9 @@
 			<li><a href="{{ url(config('hello.url') . '/entrega?status=pendentes') }}">Pendentes</a></li>
 			<li><a href="{{ url(config('hello.url') . '/entrega?status=pagas') }}">Pagas</a></li>
 			<li><a href="{{ url(config('hello.url') . '/entrega/relatorio') }}">Relatórios</a></li>
-			<li><a href="{{ url(config('hello.url') . '/entrega/relatorio/semanal/show?inicio=' . today()->format('Y-m-d') . '&termino=' . today()->format('Y-m-d') . '&ordenar=impresso_em') }}">Fechamento de hoje</a></li>
+			<!--<li><a href="{{ url(config('hello.url') . '/entrega/relatorio/semanal/show?inicio=' . today()->format('Y-m-d') . '&termino=' . today()->format('Y-m-d') . '&ordenar=impresso_em') }}">Fechamento de hoje</a></li>
 			<li><a href="{{ url(config('hello.url') . '/entrega/relatorio/semanal/show?inicio=' . today()->startOfWeek()->format('Y-m-d') . '&termino=' . today()->endOfWeek()->format('Y-m-d') . '&ordenar=impresso_em') }}">Fechamento da semana atual</a></li>
-			<li><a href="{{ url(config('hello.url') . '/entrega/relatorio/semanal/show?inicio=' . today()->subWeek(1)->startOfWeek()->format('Y-m-d') . '&termino=' . today()->subWeek(1)->endOfWeek()->format('Y-m-d') . '&ordenar=impresso_em') }}">Fechamento da semana passada</a></li>
+			<li><a href="{{ url(config('hello.url') . '/entrega/relatorio/semanal/show?inicio=' . today()->subWeek(1)->startOfWeek()->format('Y-m-d') . '&termino=' . today()->subWeek(1)->endOfWeek()->format('Y-m-d') . '&ordenar=impresso_em') }}">Fechamento da semana passada</a></li>-->
 			<li><a href="{{ url(config('hello.url') . '/entrega/create?minimal=true') }}">Tela simplificada</a></li>
 		</ul>
 	</div>

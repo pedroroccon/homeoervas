@@ -7,6 +7,7 @@ use Pedroroccon\Farmacia\Entrega;
 use Pedroroccon\Farmacia\Requests\EntregaRequest;
 use Pedroroccon\Farmacia\Filters\EntregaFilters;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class EntregaController extends Controller
 {
@@ -83,5 +84,27 @@ class EntregaController extends Controller
         $entrega->concluir($request->all());
         session()->flash('flash_success', 'Entrega para ' . $entrega->cliente . ' baixada com sucesso!');
         return back();
+    }
+
+    public function fechamento(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            $request->validate([
+                'dia' => 'required|date', 
+                'inicio_hora' => 'required|date_format:H:i', 
+                'termino_hora' => 'required|date_format:H:i', 
+            ]);
+
+            $entregas = Entrega::fechamentosPendentes($request->dia . ' ' . $request->inicio_hora . ':00', $request->dia . ' ' . $request->termino_hora . ':00')->ordenado()->get();
+            return view('farmacia::farmacia.entrega.fechamento', compact('entregas', 'request'));
+        }
+
+        try {
+            Entrega::fecharPeriodo($request->inicio, $request->termino);
+            session()->flash('flash_success', 'Período encerrado com sucesso!');
+            return redirect(config('hello.url') . '/entrega/');
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
     }
 }

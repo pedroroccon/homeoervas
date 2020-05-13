@@ -35,6 +35,10 @@ class CreateEntregasTable extends Migration
             $table->date('envio_em')->nullable();
             $table->string('responsavel')->nullable();
             $table->dateTime('impresso_em')->nullable();
+
+            // Fechamento
+            $table->dateTime('fechado_em')->nullable();
+            $table->integer('fechado_sequencial')->nullable()->default(1);
             
             $table->text('observacao')->nullable();
             $table->timestamps();

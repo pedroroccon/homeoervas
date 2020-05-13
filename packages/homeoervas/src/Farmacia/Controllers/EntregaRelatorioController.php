@@ -15,25 +15,24 @@ class EntregaRelatorioController extends Controller
         return view('farmacia::farmacia.entrega.relatorio.index');
     }
 
-    public function semanal()
+    public function fechamento(Request $request)
     {
-        return view('farmacia::farmacia.entrega.relatorio.semanal.index');
-    }
+        if ($request->isMethod('get')) {
+            return view('farmacia::farmacia.entrega.relatorio.fechamento.index');
+        }
 
-    public function semanalShow(Request $request)
-    {
         $request->validate([
-            'inicio' => 'required|date', 
-            'termino' => 'required|date|after_or_equal:inicio', 
+            'data' => 'required|date', 
             'ordenar' => 'required'
         ]);
 
-        $entregas = Entrega::whereNotNull('impresso_em')->whereDate('impresso_em', '>=', $request->inicio)->whereDate('impresso_em', '<=', $request->termino)->orderBy($request->ordenar)->get();
-        $entregasAgrupadas = $entregas->groupBy(function($key) {
-            return $key->impresso_em->format('W');
-        });
+        $entregas = Entrega::whereDate('impresso_em', '>=', $request->data)->whereDate('impresso_em', '<=', $request->data)->get();
+        $entregasRealizadas = $entregas->count();
+        $entregasPagas = $entregas->whereNotNull('pago_em')->count();
+        $entregasNaoPagas = $entregas->whereNull('pago_em')->count();
 
-        return view('farmacia::farmacia.entrega.relatorio.semanal.show', compact('entregas', 'entregasAgrupadas', 'request'));
+        $periodos = $entregas->groupBy('fechado_sequencial');
+        return view('farmacia::farmacia.entrega.relatorio.fechamento.show', compact('periodos', 'entregasRealizadas', 'entregasPagas', 'entregasNaoPagas'));
     }
 
 }

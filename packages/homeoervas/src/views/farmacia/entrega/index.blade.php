@@ -66,7 +66,7 @@
 							<table class="table hello-table hello-table-no-wrap mb-0">
 								<thead>
 									<tr>
-										<th>#</th>
+										<th>Nº</th>
 										<th>&nbsp;</th>
 										<th>Cliente</th>
 										<th class="text-right">Itens/valor</th>
@@ -116,6 +116,7 @@
 <!-- Modals -->
 @include('farmacia::farmacia.entrega.partials.search')
 @include('farmacia::farmacia.entrega.partials.concluir')
+@include('farmacia::farmacia.entrega.partials.fechamento')
 
 @endsection
 
