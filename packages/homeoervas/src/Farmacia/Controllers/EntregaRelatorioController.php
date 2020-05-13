@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Pedroroccon\Farmacia\Entrega;
 use Pedroroccon\Farmacia\Filters\EntregaFilters;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class EntregaRelatorioController extends Controller
 {
@@ -26,7 +27,15 @@ class EntregaRelatorioController extends Controller
             'ordenar' => 'required'
         ]);
 
-        $entregas = Entrega::whereDate('impresso_em', '>=', $request->data)->whereDate('impresso_em', '<=', $request->data)->get();
+        $inicio = Carbon::createFromFormat('Y-m-d', $request->data);
+        $termino = Carbon::createFromFormat('Y-m-d', $request->data);
+
+        if ($request->tipo == 'semanal') {
+            $inicio = $inicio->startOfWeek();
+            $termino = $termino->endOfWeek();
+        }
+
+        $entregas = Entrega::whereDate('impresso_em', '>=', $inicio)->whereDate('impresso_em', '<=', $termino)->get();
         $entregasRealizadas = $entregas->count();
         $entregasPagas = $entregas->whereNotNull('pago_em')->count();
         $entregasNaoPagas = $entregas->whereNull('pago_em')->count();

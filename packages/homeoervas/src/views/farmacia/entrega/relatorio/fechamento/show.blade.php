@@ -53,7 +53,7 @@
 		<div class="col-lg-3">
 			<div class="card card-body border-0 text-secondary shadow mb-4">
 				<div class="media">
-					<span class="align-self-center mr-3"><i class="fas fa-balance-scale-right fa-2x fa-fw"></i></span>
+					<span class="align-self-center mr-3"><i class="fas fa-dollar-sign fa-2x fa-fw"></i></span>
 					<div class="media-body">
 						<span class="lead d-block">{{ $entregasNaoPagas }}</span>
 						<small class="d-block">
