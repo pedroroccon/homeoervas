@@ -34,6 +34,19 @@
             margin: 0 auto;
             width: 595px;
             height: 842px;
+            page-break-after: always;
+        }
+
+        .container-resumo {
+            position: relative;
+            width: 100%;
+            height: 50%;
+            display: flex;
+            align-items: center;
+        }
+
+        .container-resumo:nth-child(2) {
+            border-top: #000 1px dashed;
         }
 
         .container-row {
@@ -91,16 +104,36 @@
         @media print {
             .d-print-none { display: none !important; }
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        table th {
+            text-align: left;
+        }
+
+        table td, table th {
+            padding: 0 5px;
+            line-height: 18px;
+            border: #000 1px solid;
+        }
+
+        table tfoot {
+            font-weight: bold;
+        }
+
+        .text-right { text-align: right; }
         
     </style>
 </head>
 <body>
+
+
+
     <div class="container">
-
-        <!-- Informações do resumo -->
-        <a href="{{ url('entrega/imprimir/resumo?entregas=' . request('entregas')) }}" class="d-print-none btn">Resumo das entregas</a>
-        
-
         <div class="container-row">
             @foreach($entregas as $entrega)
                 <div class="entrega-container">
@@ -127,6 +160,37 @@
                 </div>
             @endforeach
         </div>
+    </div>
+
+    <div class="container">
+        @for($i = 1; $i <= 2; $i++)
+            <div class="container-resumo">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td colspan="2">{{ $i }}ª via - <strong>Período {{ $entregas->first()->fechado_sequencial }} - De {{ $entregas->first()->impresso_em->format('d/m/Y H:i') }} até {{ $entregas->last()->impresso_em->format('d/m/Y H:i') }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Entregas no período</strong></td>
+                            <td class="text-right">{{ $entregas->count() }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cartão (crédito/débito)</strong></td>
+                            <td class="text-right">R$ {{ number_format($entregas->whereIn('forma_pagamento', ['Cartão de crédito', 'Cartão de débito'])->sum('troco'), 2, ',', '.') }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dinheiro</strong></td>
+                            <td class="text-right">R$ {{ number_format($entregas->where('forma_pagamento', 'Dinheiro')->sum('troco'), 2, ',', '.') }}</td>
+                        </tr>
+                        <tr style="font-size: 16px;">
+                            <td><strong>Valor total</strong></td>
+                            <td class="text-right"><strong>R$ {{ number_format($entregas->sum('troco'), 2, ',', '.') }}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+            </div>
+        @endfor
     </div>
 </body>
 </html>
