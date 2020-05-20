@@ -234,5 +234,10 @@ class Entrega extends Model
     {
         return $this->valor - $this->valor_pago;
     }
+
+    public function getValorOuTrocoAttribute()
+    {
+        return $this->troco > 0 ? $this->troco : $this->valor;
+    }
     
 }

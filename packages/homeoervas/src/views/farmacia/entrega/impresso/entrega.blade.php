@@ -173,15 +173,15 @@
                         </tr>
                         <tr>
                             <td><strong>Cartão (crédito/débito)</strong></td>
-                            <td class="text-right">R$ {{ number_format($entregas->whereIn('forma_pagamento', ['Cartão de crédito', 'Cartão de débito'])->sum('troco'), 2, ',', '.') }}</td>
+                            <td class="text-right">R$ {{ number_format($entregas->whereIn('forma_pagamento', ['Cartão de crédito', 'Cartão de débito'])->sum('valor_ou_troco'), 2, ',', '.') }}</td>
                         </tr>
                         <tr>
                             <td><strong>Dinheiro</strong></td>
-                            <td class="text-right">R$ {{ number_format($entregas->where('forma_pagamento', 'Dinheiro')->sum('troco'), 2, ',', '.') }}</td>
+                            <td class="text-right">R$ {{ number_format($entregas->where('forma_pagamento', 'Dinheiro')->sum('valor_ou_troco'), 2, ',', '.') }}</td>
                         </tr>
                         <tr style="font-size: 16px;">
                             <td><strong>Valor total</strong></td>
-                            <td class="text-right"><strong>R$ {{ number_format($entregas->sum('troco'), 2, ',', '.') }}</strong></td>
+                            <td class="text-right"><strong>R$ {{ number_format($entregas->sum('valor_ou_troco'), 2, ',', '.') }}</strong></td>
                         </tr>
                     </tbody>
                 </table>
