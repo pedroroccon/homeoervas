@@ -130,9 +130,6 @@
     </style>
 </head>
 <body>
-
-
-
     <div class="container">
         <div class="container-row">
             @foreach($entregas as $entrega)
@@ -145,7 +142,7 @@
                             <strong>Nº da entrega:</strong> {{ $entrega->pedido ?? 'Não informado' }}<br>
                             <strong>Telefone:</strong> {{ $entrega->telefone ?? 'Não informado' }}
                         </span>
-                        <span style="font-size: 15px;"><strong>Valor:</strong> R$ {{ number_format($entrega->valor, 2, ',', '.') }}{!! $entrega->estaPago() ? ' <strong>(PAGO)</strong>' : null !!}</span>
+                        <span style="font-size: 15px;"><strong>Valor:</strong> R$ {{ number_format($entrega->valor, 2, ',', '.') }}{!! $entrega->estaPago() ? ' <strong>(PAGO)</strong>' : null !!} <span style="display: inline-block; float: right;">{{ ! empty($entrega->envio_em) ? $entrega->envio_em->format('d/m/Y') : 'Data não informada' }}</span></span>
                         {!! ! empty($entrega->troco) ? '<span><strong>Troco:</strong> R$ ' . number_format($entrega->troco, 2, ',', '.') . '</span>' : null !!}
                         <hr>
                         @foreach($entrega->itens as $item)
