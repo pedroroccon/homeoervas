@@ -21,6 +21,7 @@ class EntregaFilters extends Filters
         'responsavel', 
         'semana', 
         'status', 
+        'envio_em', 
     ];
 
     protected function keyword($keyword)
@@ -57,6 +58,11 @@ class EntregaFilters extends Filters
     protected function responsavel($responsavel)
     {
         return $this->builder->where('responsavel', 'like', '%' . $responsavel . '%');
+    }
+
+    protected function envio_em($envio_em)
+    {
+        return $this->builder->whereDate('envio_em', $envio_em);
     }
 
     protected function semana($semana)

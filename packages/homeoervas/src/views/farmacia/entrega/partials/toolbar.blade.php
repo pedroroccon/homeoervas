@@ -11,10 +11,10 @@
 				{!! Form::hidden('campo', 'auto') !!}
 			{!! Form::close() !!}
 		</div>
-		<button class="btn btn-sm btn-link" v-on:click="sendToPrint()"><i class="fas fa-print fa-fw mr-2"></i> Imprimir</button>
-		<a data-toggle="modal" data-target="#m-search" href="#" class="btn btn-sm btn-link"><i class="fas fa-filter fa-sm mr-2"></i> Filtrar</a>
-		<a data-toggle="modal" data-target="#m-fechamento" href="#" class="btn btn-sm btn-link"><i class="fas fa-chart-line fa-sm mr-2"></i> Fechamento</a>
-		{!! request()->query() ? '<a href="' . url(request()->url()) . '" class="btn btn-sm btn-link text-danger"><i class="far fa-times-circle mr-2"></i>Cancelar filtro</a>' : null !!}
+		<button class="btn btn-sm btn-link text-nowrap" v-on:click="sendToPrint()"><i class="fas fa-print fa-fw mr-2"></i> Imprimir</button>
+		<a data-toggle="modal" data-target="#m-search" href="#" class="btn btn-sm btn-link text-nowrap"><i class="fas fa-filter fa-sm mr-2"></i> Filtrar</a>
+		<a data-toggle="modal" data-target="#m-fechamento" href="#" class="btn btn-sm btn-link text-nowrap"><i class="fas fa-chart-line fa-sm mr-2"></i> Fechamento</a>
+		{!! request()->query() ? '<a href="' . url(request()->url()) . '" class="btn btn-sm btn-link text-nowrap text-danger"><i class="far fa-times-circle mr-2"></i>Cancelar filtro</a>' : null !!}
 	</div>
 </div>
 

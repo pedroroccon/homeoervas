@@ -26,7 +26,9 @@ class CreateEntregasTable extends Migration
             $table->string('cep')->nullable();
             $table->decimal('valor', 16, 2)->default(0);
             $table->decimal('valor_pago')->nullable()->default(0);
+            $table->decimal('valor_retornado')->nullable()->default(0);
             $table->dateTime('pago_em')->nullable();
+            $table->string('forma_pagamento')->nullable();
             $table->decimal('troco')->nullable()->default(0);
             $table->string('pedido')->nullable();
 

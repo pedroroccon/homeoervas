@@ -24,6 +24,7 @@
                 {!! Form::select('tipo', [
                     'diario' => 'Diário', 
                     'semanal' => 'Semanal', 
+                    'motoboy' => 'Fechamento motoboy'
                 ], null, ['class' => 'form-control']) !!}
                 <span class="form-text">Informe o tipo do fechamento. Fechamento diário irá considerar somente os valores do dia. No fechamento mensal será considerado os valores desde o início até o final da data do fechamento referenciada acima.</span>
             </div>

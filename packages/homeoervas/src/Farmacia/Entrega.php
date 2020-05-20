@@ -19,6 +19,7 @@ class Entrega extends Model
         'cep', 
         'valor', 
         'valor_pago', 
+        'valor_retornado', 
         'troco', 
         'envio', 
         'envio_em', 
@@ -26,6 +27,13 @@ class Entrega extends Model
         'responsavel', 
     ];
 
+    /**
+     * Define os campos do modelo 
+     * que devem ser tratados 
+     * como datas.
+     * 
+     * @var array
+     */
     protected $dates = [
         'pago_em', 
         'envio_em', 
@@ -40,6 +48,18 @@ class Entrega extends Model
      * @var object
      */
     public $status;
+
+    /**
+     * Define as formas de pagamento 
+     * disponíveis para as entregas.
+     * 
+     * @var array
+     */
+    public static $forma_pagamento_list = [
+        'Cartão de crédito' => 'Cartão de crédito', 
+        'Cartão de débito' => 'Cartão de débito', 
+        'Dinheiro' => 'Dinheiro', 
+    ];
 
     /**
      * Função responsável 
@@ -94,11 +114,53 @@ class Entrega extends Model
         return config('hello.url') . '/entrega/' . $this->id;
     }
 
+    public function create($fields, $itens = [])
+    {
+        $this->fill($fields);
+
+        if (array_key_exists('pago', $fields) and $fields['pago'] == 1) {
+            $this->concluir(['valor_pago' => $this->valor]);
+            $this->update();
+        }
+
+        $this->gerarNumero();
+        $this->save();
+
+        foreach($itens as $item) {
+            $this->itens()->save(new EntregaItem([
+                'titulo' => $item['titulo'], 
+                'quantidade' => $item['quantidade'],
+                'homeopatia' => $item['homeopatia'],  
+                'geladeira' => $item['geladeira'], 
+                'pedido' => $item['pedido']
+            ]));
+        }
+
+        return $this;
+    }
+
+    /**
+     * Retorna se o recurso 
+     * foi pago.
+     * 
+     * @return boolean
+     */
     public function estaPago()
     {
         return $this->valor == $this->valor_pago;
     }
 
+    /**
+     * Retorna se o recurso 
+     * já foi fechado.
+     * 
+     * @return boolean
+     */
+    public function fechado()
+    {
+        return ! empty($this->fechado_em);
+    }
+    
     public function concluir(array $params = [])
     {
         $this->valor_pago = $params['valor_pago'];
@@ -108,10 +170,7 @@ class Entrega extends Model
 
     public function gerarNumero()
     {
-        $inicio = $this->created_at->startOfDay();
-        $termino = $this->created_at->endOfDay();
-
-        $numero_ultima_entrega = $this->whereDate('created_at', '>=', $inicio)->whereDate('created_at', '<=', $termino)->max('numero_entrega');
+        $numero_ultima_entrega = $this->whereDate('envio_em', $this->envio_em)->max('numero_entrega');
         $this->numero_entrega = $numero_ultima_entrega + 1;
         $this->update();
     }

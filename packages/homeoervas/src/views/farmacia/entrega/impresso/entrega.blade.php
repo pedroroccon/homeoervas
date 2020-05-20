@@ -69,11 +69,38 @@
             height: auto;
             font-weight: bold;
         }
+
+        .btn {
+            margin: 20px 0;
+            background: #007bff;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            display: inline-block !important;
+        }
+
+        .btn:hover {
+            background: #025dbd;
+        }
+        
+        .d-print-none {
+            display: block;
+        }
+
+        @media print {
+            .d-print-none { display: none !important; }
+        }
         
     </style>
 </head>
 <body>
     <div class="container">
+
+        <!-- Informações do resumo -->
+        <a href="{{ url('entrega/imprimir/resumo?entregas=' . request('entregas')) }}" class="d-print-none btn">Resumo das entregas</a>
+        
+
         <div class="container-row">
             @foreach($entregas as $entrega)
                 <div class="entrega-container">

@@ -82,9 +82,31 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 @component('hive::components.param', ['title' => 'Responsável'])
                     {!! $entrega->responsavel ?? '<span class="text-muted">Não informado</span>' !!}
+                @endcomponent
+            </div>
+            <div class="col-lg-4">
+                @component('hive::components.param', ['title' => 'Envio solicitado para'])
+                    {!! ! empty($entrega->envio_em) ? $entrega->envio_em->format('d/m/Y') : 'Não impresso' !!}
+                @endcomponent
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                @component('hive::components.param', ['title' => 'Forma de pagamento'])
+                    {!! $entrega->forma_pagamento !!}
+                @endcomponent
+            </div>
+            <div class="col-lg-4">
+                @component('hive::components.param', ['title' => 'Impresso em'])
+                    {!! ! empty($entrega->impresso_em) ? $entrega->impresso_em->format('d/m/Y') : 'Não impresso' !!}
+                @endcomponent
+            </div>
+            <div class="col-lg-4">
+                @component('hive::components.param', ['title' => 'Fechado em'])
+                    {!! ! empty($entrega->fechado_em) ? $entrega->fechado_em->format('d/m/Y') : 'Não fechado' !!}
                 @endcomponent
             </div>
         </div>

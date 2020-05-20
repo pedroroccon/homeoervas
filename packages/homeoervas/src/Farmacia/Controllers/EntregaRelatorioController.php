@@ -16,12 +16,13 @@ class EntregaRelatorioController extends Controller
         return view('farmacia::farmacia.entrega.relatorio.index');
     }
 
-    public function fechamento(Request $request)
+    public function fechamento()
     {
-        if ($request->isMethod('get')) {
-            return view('farmacia::farmacia.entrega.relatorio.fechamento.index');
-        }
+        return view('farmacia::farmacia.entrega.relatorio.fechamento.index');
+    }
 
+    public function fechamentoGerar(Request $request)
+    {
         $request->validate([
             'data' => 'required|date', 
             'ordenar' => 'required'
@@ -35,13 +36,36 @@ class EntregaRelatorioController extends Controller
             $termino = $termino->endOfWeek();
         }
 
+        if ($request->tipo == 'motoboy') {
+            $inicio = $inicio->startOfWeek();
+            $termino = $termino->endOfWeek();
+        }
+
         $entregas = Entrega::whereDate('impresso_em', '>=', $inicio)->whereDate('impresso_em', '<=', $termino)->get();
         $entregasRealizadas = $entregas->count();
         $entregasPagas = $entregas->whereNotNull('pago_em')->count();
         $entregasNaoPagas = $entregas->whereNull('pago_em')->count();
 
         $periodos = $entregas->groupBy('fechado_sequencial');
-        return view('farmacia::farmacia.entrega.relatorio.fechamento.show', compact('periodos', 'entregasRealizadas', 'entregasPagas', 'entregasNaoPagas'));
+        $entregasPorDia = $entregas->groupBy(function($indice, $valor) {
+            return $indice->impresso_em->format('d/m/Y');
+        });
+
+        $view = $request->tipo == 'motoboy' ? 'motoboy' : 'show';
+        return view('farmacia::farmacia.entrega.relatorio.fechamento.' . $view, compact(
+            'entregas', 
+            'periodos', 
+            'entregasPorDia', 
+            'entregasRealizadas', 
+            'entregasPagas', 
+            'entregasNaoPagas'
+        ));
+    }
+
+    public function saidaMotoboy(Request $request)
+    {
+        $entregas = Entrega::where('impresso_em', '>=', $request->inicio)->where('impresso_em', '<=', $request->termino)->get();
+        return view('farmacia::farmacia.entrega.impresso.saida', compact('entregas'));
     }
 
 }

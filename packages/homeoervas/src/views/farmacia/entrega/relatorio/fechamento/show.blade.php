@@ -67,9 +67,14 @@
 
 	
 	@foreach($periodos as $periodo)
-
-		
 		@component('hive::components.card', ['title' => 'Período ' . $periodo->first()->fechado_sequencial . ' - De ' . $periodo->first()->impresso_em->format('d/m/Y H:i') . ' até ' . $periodo->last()->impresso_em->format('d/m/Y H:i')])
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<a href="{{ url(config('hello.url') . '/entrega/relatorio/saida/motoboy?inicio=' . $periodo->first()->impresso_em->format('Y-m-d H:i:s') . '&termino=' . $periodo->last()->impresso_em->format('Y-m-d H:i:s')) }}" class="btn btn-sm btn-primary" target="_blank"><i class="fas fa-print fa-fw mr-2"></i> Imprimir</a>
+				</div>
+			</div>
+			<hr>
 			<div class="table-responsive">
 				<table class="table hello-table hello-table-no-wrap mb-0">
 					<thead>
@@ -79,6 +84,8 @@
 							<th class="text-right">Itens/valor</th>
 							<th>Endereço</th>
 							<th>Pago?</th>
+							<th class="text-right">Troco</th>
+							<th>Forma de pagamento</th>
 							<th class="hello-table-action">Ações</th>
 						</tr>
 					</thead>
@@ -90,12 +97,22 @@
 								<td class="text-right">{{ $entrega->itens()->count() }} item(ns)<br><small class="text-muted">R$ {{ number_format($entrega->valor, 2, ',', '.') }}</small></td>
 								<td>{{ $entrega->endereco }}, N {{ $entrega->numero }}<br><small class="text-muted">{{ $entrega->bairro }} - {{ $entrega->cidade }}/{{ $entrega->estado }}</small></td>
 								<td>{!! $entrega->pago_em ? 'Sim' : '<span class="text-muted">Não</span>' !!}</td>
+								<td class="text-right">R$ {{ number_format($entrega->troco, 2, ',', '.') }}</td>
+								<td>{{ $entrega->forma_pagamento }}</td>
 								<td class="hello-table-action">
 									-
 								</td>
 							</tr>
 						@endforeach
 					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="5">Total de entrega: {{ $periodo->count() }}</td>
+							<td class="text-right">R$ {{ number_format($periodo->sum('troco', 2, ',', '.')) }}</td>
+							<td></td>
+							<td class="hello-table-action">-</td>
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 		@endcomponent

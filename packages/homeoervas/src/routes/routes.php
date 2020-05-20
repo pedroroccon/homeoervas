@@ -3,7 +3,10 @@
 Route::group(['prefix' => config('hello.url' ), 'middleware' => ['web', 'auth']], function () {
 
     // Relatórios
-    Route::match(['get', 'post'], 'entrega/relatorio/fechamento', '\Pedroroccon\Farmacia\Controllers\EntregaRelatorioController@fechamento');
+    
+    Route::get('entrega/relatorio/saida/motoboy', '\Pedroroccon\Farmacia\Controllers\EntregaRelatorioController@saidaMotoboy');
+    Route::get('entrega/relatorio/fechamento/gerar', '\Pedroroccon\Farmacia\Controllers\EntregaRelatorioController@fechamentoGerar');
+    Route::get('entrega/relatorio/fechamento', '\Pedroroccon\Farmacia\Controllers\EntregaRelatorioController@fechamento');
     Route::get('entrega/relatorio', '\Pedroroccon\Farmacia\Controllers\EntregaRelatorioController@index');
 
     Route::match(['get', 'post'], 'entrega/fechamento', '\Pedroroccon\Farmacia\Controllers\EntregaController@fechamento');
@@ -13,6 +16,7 @@ Route::group(['prefix' => config('hello.url' ), 'middleware' => ['web', 'auth']]
     Route::resource('entrega', '\Pedroroccon\Farmacia\Controllers\EntregaController');
 });
 
+Route::get('entrega/imprimir/resumo', '\Pedroroccon\Farmacia\Controllers\EntregaController@imprimirResumo');
 Route::get('entrega/imprimir', '\Pedroroccon\Farmacia\Controllers\EntregaController@imprimir');
 
 require 'breadcrumbs.php';

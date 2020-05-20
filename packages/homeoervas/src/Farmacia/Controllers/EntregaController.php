@@ -27,7 +27,7 @@ class EntregaController extends Controller
             return $key->impresso_em->hour > 13;
         });
 
-        $entregas = Entrega::filter($filters)->ordenado()->paginate();
+        $entregas = Entrega::filter($filters)->ordenado()->paginate(120);
         return view('farmacia::farmacia.entrega.index', compact('entregas', 'entregasFeitasHoje', 'entregasFeitasDeManha', 'entregasFeitasDeTarde'));
     }
 
@@ -39,8 +39,7 @@ class EntregaController extends Controller
 
     public function store(EntregaRequest $request)
     {
-       $entrega = (new Entrega)->fill($request->all());
-       $entrega->save();
+       $entrega = (new Entrega)->create($request->all(), $request->itens);
 
        session()->flash('flash_success', 'Entrega para <a href="' . url($entrega->path()) . '">' . $entrega->cliente . '</a> adicionada com sucesso!');
        return back();
@@ -70,6 +69,7 @@ class EntregaController extends Controller
 
     public function imprimir(Request $request)
     {
+        $request->validate(['entregas' => 'required']);
         $entregas = explode(',', $request->entregas);
 
         // Atualiza as informações da entrega, informando que um item já foi impresso.
@@ -77,6 +77,13 @@ class EntregaController extends Controller
         
         $entregas = Entrega::whereIn('id', $entregas)->get();
         return view('farmacia::farmacia.entrega.impresso.entrega', compact('entregas'));
+    }
+
+    public function imprimirResumo(Request $request)
+    {
+        $request->validate(['entregas' => 'required']);
+        $entregas = Entrega::whereIn('id', explode(',', $request->entregas))->get();
+        return view('farmacia::farmacia.entrega.impresso.saida', compact('entregas'));
     }
 
     public function concluir(Request $request, Entrega $entrega)

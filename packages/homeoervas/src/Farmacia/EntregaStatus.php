@@ -32,7 +32,7 @@ class EntregaStatus extends Statusable
         $this->descricao = 'Pendente';
         $this->step = 0;
         $this->classe = 'secondary animated flash infinite';
-        $this->data = $this->recurso->created_at;
+        $this->data = $this->recurso->envio_em;
 
         return $this;
     }

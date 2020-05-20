@@ -56,7 +56,7 @@
 					</div>
 				</div>
 			@else
-				@include('hive::components.no-results')
+				@include('hive::components.no-results', ['msg' => 'Nenhuma entrega encontrada para realizar o fechamento. Verifique se o fechamento já foi realizado e se há entregas impressas na data selecionada. Para que uma entrega apareça no fechamento, ela deve primeiramente ter sido impressa. As datas do fechamento levam em conta a data de impressão das etiquetas da entrega.'])
 			@endif
 
 		</div>

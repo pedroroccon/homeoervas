@@ -2,19 +2,19 @@
     @component('hive::components.card', ['title' => 'Informações da entrega'])
         
         <div class="row">
-            <div class="col-lg-9 form-group">
+            <div class="col-lg-8 form-group">
                 {!! Form::label('cliente', 'Nome do cliente *') !!}
                 {!! Form::text('cliente', null, ['class' => 'form-control', 'required']) !!}
                 <span class="form-text">Por favor, informe o nome ou parte do nome do cliente para pesquisar.</span>
             </div>
-            <div class="col-lg-3 form-group">
+            <div class="col-lg-4 form-group">
                 {!! Form::label('pago', 'Já está pago? *') !!}
                 {!! Form::select('pago', [
                     '' => 'Por favor, selecione...', 
                     0 => 'Não', 
                     1 => 'Sim', 
                 ], null, ['class' => 'form-control', 'required']) !!}
-                <span class="form-text">Informe se o pedido já foi pago.</span>
+                <span class="form-text">Informe se o pedido já foi pago. <strong class="text-success">Caso tenha sido pago, é obrigatório informar a forma de pagamento</strong>.</span>
             </div>
         </div>
         <div class="row">
@@ -27,6 +27,13 @@
                 {!! Form::label('pedido', 'Número do pedido') !!}
                 {!! Form::text('pedido', null, ['class' => 'form-control']) !!}
                 <span class="form-text">Informe o código do pedido referente a esta entrega.</span>
+            </div>
+            <div class="col-lg-5">
+                {!! Form::label('forma_pagamento', 'Forma de pagamento') !!}
+                {!! Form::select('forma_pagamento', [
+                    '' => 'Por favor, selecione...', 
+                ] + Pedroroccon\Farmacia\Entrega::$forma_pagamento_list, null, ['class' => 'form-control']) !!}
+                <span class="form-text">Informe a forma de pagamento, ou deixe em branco caso não esteja definida.</span>
             </div>
         </div>
 
@@ -166,14 +173,10 @@
                 ], null, ['class' => 'form-control']) !!}
                 <span class="form-text">Informe o tipo do envio.</span>
             </div>
-            <div class="col-lg-2 form-group">
-                {!! Form::label('envio_hoje', 'Enviar hoje? *') !!}
-                {!! Form::select('envio_hoje', [
-                    '' => 'Selecione...', 
-                    0 => 'Não', 
-                    1 => 'Sim', 
-                ], null, ['class' => 'form-control', 'required']) !!}
-                <strong class="form-text text-danger">P.S. Até 16h na mesa do Rodrigo!</strong>
+            <div class="col-lg-4 form-group">
+                {!! Form::label('envio_em', 'Enviar em') !!}
+                {!! Form::date('envio_em', today(), ['class' => 'form-control', 'required']) !!}
+                <strong class="form-text text-danger">P.S. Envios no dia: Até 16h na mesa do Rodrigo!</strong>
             </div>
         </div>
         <hr>

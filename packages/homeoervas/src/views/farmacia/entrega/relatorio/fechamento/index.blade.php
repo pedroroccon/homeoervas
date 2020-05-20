@@ -8,7 +8,7 @@
 <!-- Breadcrumbs -->
 @include('hive::components.breadcrumbs', ['breadcrumb' => Breadcrumbs::render('hello-entrega-relatorio-fechamento')])
 
-{!! Form::open(['url' => url()->current(), 'method' => 'post', 'class' => 'hello-form']) !!}
+{!! Form::open(['url' => url()->current() . '/gerar', 'method' => 'get', 'class' => 'hello-form']) !!}
     @include('farmacia::farmacia.entrega.relatorio.fechamento.partials.form', ['submit_button_text' => 'Gerar relatório'])
 {!! Form::close() !!}
 

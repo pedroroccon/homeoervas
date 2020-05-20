@@ -73,6 +73,7 @@
                                         <th>Endereço</th>
                                         <th>Status</th>
 										<th class="text-center"><i class="fas fa-print fa-fw"></i></th>
+										<th class="text-center"><i class="far fa-check-circle fa-fw"></i></th>
 										<th class="hello-table-action">Ações</th>
 									</tr>
 								</thead>
@@ -86,10 +87,11 @@
 										<td>{{ $entrega->endereco }}, N {{ $entrega->numero }}<br><small class="text-muted">{{ $entrega->bairro }} - {{ $entrega->cidade }}/{{ $entrega->estado }}</small></td>
                                         <td class="{{ $entrega->status->classe }}">{{ $entrega->status->descricao }}<br><small>{{ $entrega->status->data->format('d/m/Y H:i') }}</small></td>
                                         <td class="text-center"><i data-toggle="tooltip" title="{{ ! empty($entrega->impresso_em) ? 'Impresso em ' . $entrega->impresso_em->format('d/m/Y') : 'Não impresso' }}" class="fas fa-print fa-fw {{ ! empty($entrega->impresso_em) ? 'text-success' : 'text-light' }}"></i></td>
+										<td class="text-center"><i class="fa-check-circle fa-fw {{ $entrega->fechado() ? 'fas text-success' : 'far text-muted' }}" data-toggle="tooltip" title="{{ $entrega->fechado() ? 'Entrega fechada' : 'Entrega em aberto' }}"></i></td>
 										<td class="hello-table-action">
 											{!! Form::open(['url' => $entrega->path(), 'method' => 'delete']) !!}
 												@if ( ! $entrega->estaPago())
-													<span data-toggle="tooltip" title="Concluir entrega"><a class="btn btn-sm btn-link" data-toggle="modal" data-target="#m-concluir" data-url="{{ url($entrega->path() . '/concluir') }}" href="#" data-cliente="{{ $entrega->cliente }}" data-valor="{{ $entrega->valor }}"><i class="fas fa-truck fa-sm"></i></a></span>
+													<span data-toggle="tooltip" title="Concluir entrega"><a class="btn btn-sm btn-link" data-toggle="modal" data-target="#m-concluir" data-url="{{ url($entrega->path() . '/concluir') }}" href="#" data-cliente="{{ $entrega->cliente }}" data-valor="{{ $entrega->valor }}" data-troco="{{ $entrega->troco }}" data-forma-pagamento="{{ $entrega->forma_pagamento }}"><i class="fas fa-truck fa-sm"></i></a></span>
 												@endif
 											    <button class="btn btn-sm btn-link btn-confirm-delete" data-toggle="tooltip" title="Remover" type="submit"><i class="fas fa-trash fa-sm text-danger"></i></button>
 											{!! Form::close() !!}
@@ -140,13 +142,12 @@
 		$(function() {
 			$('#m-concluir').on('show.bs.modal', function (event) {
 				var button = $(event.relatedTarget);
-				var url = button.data('url');
-				var valor = button.data('valor');
-				var cliente = button.data('cliente');
 				var modal = $(this);
-				modal.find('form').attr('action', url);
-				modal.find('.modal-title').text('Concluir entrega para ' + cliente);
-				modal.find('.modal-body #valor_pago').val(valor);
+				modal.find('form').attr('action', button.data('url'));
+				modal.find('.modal-title').text('Concluir entrega para ' + button.data('cliente'));
+				modal.find('.modal-body #valor_pago').val(button.data('valor'));
+				modal.find('.modal-body #troco').val(button.data('troco'));
+				modal.find('.modal-body #forma_pagamento').val(button.data('forma-pagamento'));
 			});
 		});
 

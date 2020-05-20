@@ -26,6 +26,7 @@ class EntregaRequest extends FormRequest
         return [
             'cliente' => 'required', 
             'pago' => 'required', 
+            'forma_pagamento' => 'nullable|required_if:pago,1', 
             'endereco' => 'required', 
             'numero' => 'required', 
             'bairro' => 'required', 
@@ -34,7 +35,7 @@ class EntregaRequest extends FormRequest
             'valor' => 'required|numeric', 
             'troco' => 'nullable|numeric', 
             'envio' => 'required', 
-            'envio_hoje' => 'required|boolean', 
+            'envio_em' => 'required|date', 
             'responsavel' => 'required', 
         ];
     }
