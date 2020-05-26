@@ -34,8 +34,10 @@
             margin: 0 auto;
             width: 595px;
             height: 842px;
-            page-break-after: always;
         }
+        
+        .break-before { page-break-before: always; }
+        .break-after { page-break-after: always; }
 
         .container-resumo {
             position: relative;
@@ -64,9 +66,6 @@
             border: #000 1px solid;
             box-sizing: border-box;
             display: table-cell;
-/*            display: flex;
-            align-items: center;
-            justify-content: middle;*/
         }
 
         hr {
@@ -130,9 +129,10 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    @foreach($entregas->chunk(8) as $container)
+    <div class="container break-before">
         <div class="container-row">
-            @foreach($entregas as $entrega)
+            @foreach($container as $entrega)
                 <div class="entrega-container">
                     <div class="pedido"><span>E. {{ $entrega->numero_entrega }}</span></div>
                     <div>
@@ -158,8 +158,10 @@
             @endforeach
         </div>
     </div>
-
-    <div class="container">
+    @endforeach
+    
+    <div class="break-after"></div>
+    <div class="container break-after">
         @for($i = 1; $i <= 2; $i++)
             <div class="container-resumo">
                 <table class="table">
