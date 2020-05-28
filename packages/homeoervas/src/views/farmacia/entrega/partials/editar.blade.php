@@ -105,12 +105,8 @@
 	                <span class="form-text">Informe o tipo do envio.</span>
 	            </div>
 	            <div class="col-lg-6 form-group">
-	                {!! Form::label('envio_hoje', 'Enviar hoje? *') !!}
-	                {!! Form::select('envio_hoje', [
-	                    '' => 'Selecione...', 
-	                    0 => 'Não', 
-	                    1 => 'Sim', 
-	                ], null, ['class' => 'form-control', 'required']) !!}
+	                {!! Form::label('envio_em', 'Enviar em') !!}
+	                {!! Form::date('envio_em', isset($entrega->envio_em) ? $entrega->envio_em->format('Y-m-d') : null, ['class' => 'form-control', 'required']) !!}
 	                <strong class="form-text text-danger">P.S. Até 16h na mesa do Rodrigo!</strong>
 	            </div>
 	        </div>
