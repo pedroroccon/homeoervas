@@ -17,7 +17,7 @@
 				<div class="media">
 					<span class="align-self-center mr-3"><i class="fas fa-truck fa-2x mr-2"></i></span>
 					<div class="media-body">
-						<span class="lead d-block">R$ {{ number_format($entregasFeitasHoje->sum('valor'), 2, ',', '.') }}</span>
+						<span class="lead d-block">R$ {{ number_format($entregasFeitasHoje->sum('valor_ou_troco'), 2, ',', '.') }}</span>
 						<small class="d-block">
 							Entregas hoje {{ today()->format('d/m/Y') }}<br>
 						</small>
@@ -30,7 +30,7 @@
 				<div class="media">
 					<span class="align-self-center mr-3"><i class="fas fa-stopwatch fa-2x mr-2"></i></span>
 					<div class="media-body">
-						<span class="lead d-block">R$ {{ number_format($entregasFeitasDeManha->sum('valor'), 2, ',', '.') }}</span>
+						<span class="lead d-block">R$ {{ number_format($entregasFeitasDeManha->sum('valor_ou_troco'), 2, ',', '.') }}</span>
 						<small class="d-block">
 							No período da manhã<br>
 						</small>
@@ -43,7 +43,7 @@
 				<div class="media">
 					<span class="align-self-center mr-3"><i class="fas fa-stopwatch fa-2x mr-2"></i></span>
 					<div class="media-body">
-						<span class="lead d-block">R$ {{ number_format($entregasFeitasDeTarde->sum('valor'), 2, ',', '.') }}</span>
+						<span class="lead d-block">R$ {{ number_format($entregasFeitasDeTarde->sum('valor_ou_troco'), 2, ',', '.') }}</span>
 						<small class="d-block">
 							No período da tarde<br>
 						</small>
@@ -83,7 +83,7 @@
 										<td>{{ $entrega->numero_entrega }}</td>
 										<td>{!! Form::checkbox('selectedResources[]', $entrega->id, 0, ['v-model' => 'selectedResources']) !!}</td>
 										<td><strong><a href="{{ url($entrega->path()) }}">{{ $entrega->cliente }}</a></strong><br><small class="text-muted">{{ $entrega->telefone ?? 'Sem telefone associado' }}</small></td>
-										<td class="text-right">{{ $entrega->itens()->count() }} item(ns)<br><small class="text-muted">R$ {{ number_format($entrega->valor, 2, ',', '.') }}</small></td>
+										<td class="text-right">{{ $entrega->itens()->count() }} item(ns)<br><small class="text-muted">R$ {{ number_format($entrega->valor_ou_troco, 2, ',', '.') }}</small></td>
 										<td>{{ $entrega->endereco }}, N {{ $entrega->numero }}<br><small class="text-muted">{{ $entrega->bairro }} - {{ $entrega->cidade }}/{{ $entrega->estado }}</small></td>
                                         <td class="{{ $entrega->status->classe }}">{{ $entrega->status->descricao }}<br><small>{{ $entrega->status->data->format('d/m/Y H:i') }}</small></td>
                                         <td class="text-center"><i data-toggle="tooltip" title="{{ ! empty($entrega->impresso_em) ? 'Impresso em ' . $entrega->impresso_em->format('d/m/Y') : 'Não impresso' }}" class="fas fa-print fa-fw {{ ! empty($entrega->impresso_em) ? 'text-success' : 'text-light' }}"></i></td>
