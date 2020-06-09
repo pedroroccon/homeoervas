@@ -28,9 +28,6 @@
 					{!! Form::label('forma_pagamento', 'Forma de pagamento') !!}
 					{!! Form::select('forma_pagamento', [
 						'' => 'Por favor, selecione...', 
-						'Dinheiro' => 'Dinheiro', 
-						'Cartão de crédito' => 'Cartão de crédito', 
-						'Cartão de débito' => 'Cartão de débito', 
 					] + Pedroroccon\Farmacia\Entrega::$forma_pagamento_list, null, ['class' => 'form-control']) !!}
 					<span class="form-text">Informe a forma de pagamento.</span>
 				</div>

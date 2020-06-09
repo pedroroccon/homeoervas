@@ -20,6 +20,15 @@
 	                <span class="form-text">Informe se o pedido já foi pago.</span>
 	            </div>
 			</div>
+			<div class="row form-group">
+				<div class="col-lg-12 form-group">
+					{!! Form::label('forma_pagamento', 'Forma de pagamento') !!}
+					{!! Form::select('forma_pagamento', [
+						'' => 'Por favor, selecione...', 
+					] + Pedroroccon\Farmacia\Entrega::$forma_pagamento_list, null, ['class' => 'form-control']) !!}
+					<span class="form-text">Informe a forma de pagamento.</span>
+	            </div>
+			</div>
 
 			<div class="row">
 				<div class="col-lg-6 form-group">
