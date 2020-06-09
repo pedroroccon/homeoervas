@@ -93,6 +93,13 @@ class EntregaController extends Controller
         return back();
     }
 
+    public function desconcluir(Request $request, Entrega $entrega)
+    {
+        $entrega->desconcluir($request->all());
+        session()->flash('flash_success', 'Entrega para ' . $entrega->cliente . ' estornada com sucesso!');
+        return back();
+    }
+
     public function fechamento(Request $request)
     {
         if ($request->isMethod('get')) {

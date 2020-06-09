@@ -168,6 +168,13 @@ class Entrega extends Model
         $this->update();
     }
 
+    public function desconcluir()
+    {
+        $this->valor_pago = null;
+        $this->pago_em = null;
+        $this->update();
+    }
+
     public function gerarNumero()
     {
         $numero_ultima_entrega = $this->whereDate('envio_em', $this->envio_em)->max('numero_entrega');

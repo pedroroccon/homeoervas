@@ -92,6 +92,8 @@
 											{!! Form::open(['url' => $entrega->path(), 'method' => 'delete']) !!}
 												@if ( ! $entrega->estaPago())
 													<span data-toggle="tooltip" title="Concluir entrega"><a class="btn btn-sm btn-link" data-toggle="modal" data-target="#m-concluir" data-url="{{ url($entrega->path() . '/concluir') }}" href="#" data-cliente="{{ $entrega->cliente }}" data-valor="{{ $entrega->valor }}" data-troco="{{ $entrega->troco }}" data-forma-pagamento="{{ $entrega->forma_pagamento }}"><i class="fas fa-truck fa-sm"></i></a></span>
+												@else 
+													<span data-toggle="tooltip" title="Estornar entrega"><a class="btn btn-sm btn-link" data-toggle="modal" data-target="#m-estornar" data-url="{{ url($entrega->path() . '/desconcluir') }}" href="#" data-cliente="{{ $entrega->cliente }}"><i class="fas fa-undo-alt fa-sm"></i></a></span>
 												@endif
 											    <button class="btn btn-sm btn-link btn-confirm-delete" data-toggle="tooltip" title="Remover" type="submit"><i class="fas fa-trash fa-sm text-danger"></i></button>
 											{!! Form::close() !!}
@@ -118,6 +120,7 @@
 <!-- Modals -->
 @include('farmacia::farmacia.entrega.partials.search')
 @include('farmacia::farmacia.entrega.partials.concluir')
+@include('farmacia::farmacia.entrega.partials.estornar')
 @include('farmacia::farmacia.entrega.partials.fechamento')
 
 @endsection
@@ -148,6 +151,13 @@
 				modal.find('.modal-body #valor_pago').val(button.data('valor'));
 				modal.find('.modal-body #troco').val(button.data('troco'));
 				modal.find('.modal-body #forma_pagamento').val(button.data('forma-pagamento'));
+			});
+
+			$('#m-estornar').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget);
+				var modal = $(this);
+				modal.find('form').attr('action', button.data('url'));
+				modal.find('.modal-title').text('Estornar entrega para ' + button.data('cliente'));
 			});
 		});
 

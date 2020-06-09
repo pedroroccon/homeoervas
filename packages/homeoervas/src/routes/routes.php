@@ -12,6 +12,7 @@ Route::group(['prefix' => config('hello.url' ), 'middleware' => ['web', 'auth']]
     Route::match(['get', 'post'], 'entrega/fechamento', '\Pedroroccon\Farmacia\Controllers\EntregaController@fechamento');
 
     Route::resource('entrega/{entrega}/item', '\Pedroroccon\Farmacia\Controllers\EntregaItemController');
+    Route::post('entrega/{entrega}/desconcluir', '\Pedroroccon\Farmacia\Controllers\EntregaController@desconcluir');
     Route::post('entrega/{entrega}/concluir', '\Pedroroccon\Farmacia\Controllers\EntregaController@concluir');
     Route::resource('entrega', '\Pedroroccon\Farmacia\Controllers\EntregaController');
 });
