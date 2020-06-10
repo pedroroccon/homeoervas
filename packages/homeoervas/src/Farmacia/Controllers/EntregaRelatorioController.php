@@ -68,4 +68,21 @@ class EntregaRelatorioController extends Controller
         return view('farmacia::farmacia.entrega.impresso.saida', compact('entregas'));
     }
 
+    public function pendentes(Request $request)
+    {
+        if ($request->isMethod('post')) {
+
+            $request->validate([
+                'inicio' => 'required|date', 
+                'termino' => 'required|date', 
+                'ordenar' => 'required', 
+            ]);
+
+            $entregas = Entrega::pendentes()->where('impresso_em', '>=', $request->inicio)->where('impresso_em', '<=', $request->termino)->orderBy($request->ordenar)->get();
+            return view('farmacia::farmacia.entrega.relatorio.pendentes.show', compact('entregas', 'request'));
+        }
+
+        return view('farmacia::farmacia.entrega.relatorio.pendentes.index');
+    }
+
 }

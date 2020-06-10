@@ -32,3 +32,7 @@ Breadcrumbs::register('hello-entrega-relatorio-fechamento', function ($b) {
     $b->parent('hello-entrega-relatorio');
     $b->push('Relatório de fechamento de entregas', url(config('hello.url') . '/entrega/relatorio/fechamento'));
 });
+Breadcrumbs::register('hello-entrega-relatorio-pendentes', function ($b) {
+    $b->parent('hello-entrega-relatorio');
+    $b->push('Relatório de entregas pendentes', url(config('hello.url') . '/entrega/relatorio/pendentes'));
+});
