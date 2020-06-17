@@ -78,7 +78,7 @@ class EntregaRelatorioController extends Controller
                 'ordenar' => 'required', 
             ]);
 
-            $entregas = Entrega::pendentes()->where('impresso_em', '>=', $request->inicio)->where('impresso_em', '<=', $request->termino)->orderBy($request->ordenar)->get();
+            $entregas = Entrega::pendentes()->whereDate('impresso_em', '>=', $request->inicio)->whereDate('impresso_em', '<=', $request->termino)->orderBy($request->ordenar)->get();
             return view('farmacia::farmacia.entrega.relatorio.pendentes.show', compact('entregas', 'request'));
         }
 
