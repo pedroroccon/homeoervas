@@ -4,30 +4,19 @@ namespace Pedroroccon\Farmacia\Observers;
 
 use Pedroroccon\Farmacia\Entrega;
 use Pedroroccon\Farmacia\EntregaItem;
+use Pedroroccon\Farmacia\Mails\EntregaRemovidaMail;
+use Mail;
 
 class EntregaObserver
 {
-    public function created(Entrega $entrega)
-    {
-        $entrega->gerarNumero();
 
-        if (request()->has('pago')) {
-            if (request('pago') == 1) {
-                $entrega->concluir(['valor_pago' => $entrega->valor]);
-                $entrega->update();
-            }
-        }
-    
-        if (request()->has('itens')) {
-            foreach(request('itens') as $item) {
-                $entrega->itens()->save(new EntregaItem([
-                    'titulo' => $item['titulo'], 
-                    'quantidade' => $item['quantidade'],
-                    'homeopatia' => $item['homeopatia'],  
-                    'geladeira' => $item['geladeira'], 
-                    'pedido' => $item['pedido']
-                ]));
-            }
+    public function deleted(Entrega $entrega)
+    {
+        try {
+            Mail::to(explode(';', env('APP_NOTIFICATIONS_EMAIL')))->send(new EntregaRemovidaMail($entrega));
+        } catch (Exception $e) {
+            return redirect(config('hello.url') . '/entrega')->withErrors(['Houve um problema ao enviar o e-mail de notificação de remoção: ' . $e->getMessage() . '. A mensagem ficará salva nos logs, caso seja necessário consultar. Entrega: ' . $entrega->id]);
         }
     }
+
 }

@@ -28,7 +28,7 @@ class FarmaciaServiceProvider extends ServiceProvider
         $this->registerEloquentFactoriesFrom(__DIR__ . '/../database/factories');
 
         // Observers
-        // Entrega::observe(new EntregaObserver);
+        Entrega::observe(new EntregaObserver);
     }
 
     /**
