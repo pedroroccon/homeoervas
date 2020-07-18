@@ -47,7 +47,7 @@
 				<td>{{ $entrega->endereco }}, N {{ $entrega->numero }}</td>
 				<td>{{ $entrega->bairro }} - {{ $entrega->cidade }}/{{ $entrega->estado }}</td>
 				<td>{{ $entrega->status->descricao }}</td>
-				<td>{{ $entrega->status->data->format('d/m/Y') }}</td>
+				<td>{{ !empty($entrega->status->data) ? $entrega->status->data->format('d/m/Y') : 'Não informado' }}</td>
 			</tr>
 			@endforeach
 		</tbody>
