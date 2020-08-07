@@ -59,6 +59,9 @@ class EntregaController extends Controller
         if ($request->pago == 0) {
             $entrega->desconcluir();
         }
+        if ($request->pago == 1) {
+            $entrega->concluir(['valor_pago' => $entrega->valor]);
+        }
 
         session()->flash('flash_success', 'Entrega para <a href="' . url($entrega->path()) . '">' . $entrega->cliente . '</a> alterada com sucesso!');
         return back();
