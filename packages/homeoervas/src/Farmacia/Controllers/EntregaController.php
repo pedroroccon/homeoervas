@@ -56,6 +56,10 @@ class EntregaController extends Controller
         $entrega->fill($request->all());
         $entrega->update();
 
+        if ($request->pago == 0) {
+            $entrega->desconcluir();
+        }
+
         session()->flash('flash_success', 'Entrega para <a href="' . url($entrega->path()) . '">' . $entrega->cliente . '</a> alterada com sucesso!');
         return back();
     }
