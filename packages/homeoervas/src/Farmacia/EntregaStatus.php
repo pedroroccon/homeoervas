@@ -8,7 +8,7 @@ class EntregaStatus extends Statusable
 {
     public function processar()
     {
-        if ($this->recurso->valor_saldo <= 0) {
+        if ($this->recurso->valor_saldo <= 0 and  ! empty($this->recurso->pago_em)) {
             $this->codigo = 'c';
             $this->descricao = 'Pago R$ ' . number_format($this->recurso->valor_pago, 2, ',', '.');
             $this->classe = 'text-success';

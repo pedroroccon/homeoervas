@@ -147,6 +147,14 @@ class Entrega extends Model
      */
     public function estaPago()
     {
+        if (empty($this->pago_em)) {
+            return false;
+        }
+
+        if (empty($this->valor_pago)) {
+            return false;
+        }
+
         return $this->valor == $this->valor_pago;
     }
 
