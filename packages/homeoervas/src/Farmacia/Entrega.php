@@ -178,7 +178,7 @@ class Entrega extends Model
 
     public function desconcluir()
     {
-        $this->valor_pago = null;
+        $this->valor_pago = 0;
         $this->pago_em = null;
         $this->update();
     }
