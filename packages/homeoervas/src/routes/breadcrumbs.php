@@ -23,7 +23,6 @@ Breadcrumbs::register('hello-entrega-fechamento', function ($b) {
 });
 
 // Entrega - relatórios
-
 Breadcrumbs::register('hello-entrega-relatorio', function ($b) {
     $b->parent('hello-entrega');
     $b->push('Relatórios', url(config('hello.url') . '/entrega/relatorio'));
@@ -35,4 +34,8 @@ Breadcrumbs::register('hello-entrega-relatorio-fechamento', function ($b) {
 Breadcrumbs::register('hello-entrega-relatorio-pendentes', function ($b) {
     $b->parent('hello-entrega-relatorio');
     $b->push('Relatório de entregas pendentes', url(config('hello.url') . '/entrega/relatorio/pendentes'));
+});
+Breadcrumbs::register('hello-entrega-relatorio-pendentes-por-data-de-entrega', function ($b) {
+    $b->parent('hello-entrega-relatorio');
+    $b->push('Relatório de entregas pendentes por data de entrega', url(config('hello.url') . '/entrega/relatorio/pendentes-por-data-de-entrega'));
 });
